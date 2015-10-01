@@ -5,22 +5,28 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class mainFrame extends JFrame implements ActionListener{
+	JPanel mainPanel;
 	startPage Start;
 	howToPlayPage HowToPlay;
 	chooseCampPage ChooseCamp;
 	mapPage Map;
+	homeCamp HomeCamp;
 	int numberOfPlayers, campNo;
+	boolean startGame;
 	
 	public mainFrame() {
 		setTitle("Clash of Clandians");
 		GUI();
+		startGame = false;
 	}
 	
 	void GUI() {
 		setPreferredSize(new Dimension(640,480));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainPanel = new JPanel();
 		
 		//frames
 		Start = new startPage();
@@ -38,9 +44,24 @@ public class mainFrame extends JFrame implements ActionListener{
 		ChooseCamp.camp3.addActionListener(this);
 		ChooseCamp.back.addActionListener(this);
 		
-		add(Start);
+		mainPanel.add(Start);
+		add(mainPanel);
 		pack();
 		setVisible(true);
+	}
+	
+	homeCamp createCamp(int campNo){
+		if(campNo == 1) return new homeCamp(new Camp1());
+		else if(campNo == 2) return new homeCamp(new Camp2());
+		else return new homeCamp(new Camp3());
+	}
+
+	void goToHomeCamp(){
+		mainPanel.removeAll();
+		HomeCamp = createCamp(campNo);
+		mainPanel.add(HomeCamp);
+		repaint();
+		revalidate();
 	}
 
 	public void actionPerformed(ActionEvent e) {
@@ -48,15 +69,15 @@ public class mainFrame extends JFrame implements ActionListener{
 		//START PAGE
 		if(e.getSource() == Start.start) { // Start button
 			numberOfPlayers = Start.getNumberOfPlayers();
-			remove(Start);
-			add(ChooseCamp);
+			mainPanel.remove(Start);
+			mainPanel.add(ChooseCamp);
 			repaint();
 			revalidate();
 		}
 		
 		if(e.getSource() == Start.howToPlay) { // How to Play button
-			remove(Start);
-			add(HowToPlay);
+			mainPanel.remove(Start);
+			mainPanel.add(HowToPlay);
 			repaint();
 			revalidate();
 		}
@@ -68,45 +89,51 @@ public class mainFrame extends JFrame implements ActionListener{
 		
 		// HOW TO PLAY PAGE
 		if(e.getSource() == HowToPlay.back) { // back button
-			remove(HowToPlay);
-			add(Start);
+			mainPanel.remove(HowToPlay);
+			mainPanel.add(Start);
 			repaint();
 			revalidate();
 		}
 		
 		// CHOOSE CAMP PAGE
 		if(e.getSource() == ChooseCamp.back) { // back button for choose camp
-			remove(ChooseCamp);
-			add(Start);
+			mainPanel.remove(ChooseCamp);
+			mainPanel.add(Start);
 			repaint();
 			revalidate();
 		}
 
 		if(e.getSource() == ChooseCamp.camp1) { // choosing camp 1
 			campNo = 1; // predefined camp 1
-			remove(ChooseCamp);
+			mainPanel.remove(ChooseCamp);
 			Map.setMap(numberOfPlayers);
-			add(Map);
+			mainPanel.add(Map);
 			repaint();
 			revalidate();
+			startGame = true; //server should change this
+			HomeCamp = new homeCamp(new Camp1());
 		}
 
 		if(e.getSource() == ChooseCamp.camp2) { // choosing camp 2
 			campNo = 2; // predefined camp 2
-			remove(ChooseCamp);
+			mainPanel.remove(ChooseCamp);
 			Map.setMap(numberOfPlayers);
-			add(Map);
+			mainPanel.add(Map);
 			repaint();
 			revalidate();
+			startGame = true; //server should change this
+			HomeCamp = new homeCamp(new Camp2());
 		}
 
 		if(e.getSource() == ChooseCamp.camp3) { // choosing camp 3
 			campNo = 3; // predefined camp 3
-			remove(ChooseCamp);
+			mainPanel.remove(ChooseCamp);
 			Map.setMap(numberOfPlayers);
-			add(Map);
+			mainPanel.add(Map);
 			repaint();
 			revalidate();
+			startGame = true; //server should change this
+			HomeCamp = new homeCamp(new Camp3());
 		}
 	}
 }

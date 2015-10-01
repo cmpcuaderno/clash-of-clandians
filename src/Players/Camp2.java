@@ -12,9 +12,11 @@ public class Camp2 extends Camp{
 		dragons = new ArrayList<Dragon>();
 		wallBreakers = new ArrayList<WallBreaker>();
 		hogRiders = new ArrayList<HogRider>();
-		
-		mortar = new Mortar();
-		wizardTower = new WizardTower();
+		cannons = new ArrayList<Cannon>();
+		archerTowers = new ArrayList<ArcherTower>();
+		walls = new ArrayList<Wall>();
+		mortars = new ArrayList<Mortar>();
+		wizardTowers = new ArrayList<WizardTower>();
 		townHall = new TownHall();
 		
 		for(i=0; i<30; i++) barbarians.add(new Barbarian());
@@ -27,5 +29,7 @@ public class Camp2 extends Camp{
 		for(i=0; i<3; i++) cannons.add(new Cannon());
 		for(i=0; i<3; i++) archerTowers.add(new ArcherTower());
 		for(i=0; i<75; i++) walls.add(new Wall());
+		mortars.add(new Mortar());
+		wizardTowers.add(new WizardTower());
 	}
 }

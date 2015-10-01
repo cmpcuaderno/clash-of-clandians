@@ -29,6 +29,11 @@ public class Defense {
 	}
 	
 	//methods
+	void position(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
+	
 	void setFocus(Troop t){
 		focus = t;
 	}

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Camp1 extends Camp{
 	public Camp1(){
+		// queued buildings/troops
 		int i;
 		barbarians = new ArrayList<Barbarian>();
 		archers = new ArrayList<Archer>();
@@ -12,9 +13,11 @@ public class Camp1 extends Camp{
 		dragons = new ArrayList<Dragon>();
 		wallBreakers = new ArrayList<WallBreaker>();
 		hogRiders = new ArrayList<HogRider>();
-		
-		mortar = new Mortar();
-		wizardTower = new WizardTower();
+		cannons = new ArrayList<Cannon>();
+		archerTowers = new ArrayList<ArcherTower>();
+		walls = new ArrayList<Wall>();
+		mortars = new ArrayList<Mortar>();
+		wizardTowers = new ArrayList<WizardTower>();
 		townHall = new TownHall();
 		
 		for(i=0; i<37; i++) barbarians.add(new Barbarian());
@@ -27,5 +30,21 @@ public class Camp1 extends Camp{
 		for(i=0; i<3; i++) cannons.add(new Cannon());
 		for(i=0; i<3; i++) archerTowers.add(new ArcherTower());
 		for(i=0; i<75; i++) walls.add(new Wall());
+		mortars.add(new Mortar());
+		wizardTowers.add(new WizardTower());
+		
+		// positioned buildings/deployed troops
+		barbariansP = new ArrayList<Barbarian>();
+		archersP = new ArrayList<Archer>();
+		giantsP = new ArrayList<Giant>();
+		wizardsP = new ArrayList<Wizard>();
+		dragonsP = new ArrayList<Dragon>();
+		wallBreakersP = new ArrayList<WallBreaker>();
+		hogRidersP = new ArrayList<HogRider>();
+		cannonsP = new ArrayList<Cannon>();
+		archerTowersP = new ArrayList<ArcherTower>();
+		wallsP = new ArrayList<Wall>();
+		mortarsP = new ArrayList<Mortar>();
+		wizardTowersP = new ArrayList<WizardTower>();
 	}
 }
