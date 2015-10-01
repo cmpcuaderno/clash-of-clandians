@@ -31,5 +31,19 @@ public class Camp2 extends Camp{
 		for(i=0; i<75; i++) walls.add(new Wall());
 		mortars.add(new Mortar());
 		wizardTowers.add(new WizardTower());
+		
+		// positioned buildings/deployed troops
+		barbariansP = new ArrayList<Barbarian>();
+		archersP = new ArrayList<Archer>();
+		giantsP = new ArrayList<Giant>();
+		wizardsP = new ArrayList<Wizard>();
+		dragonsP = new ArrayList<Dragon>();
+		wallBreakersP = new ArrayList<WallBreaker>();
+		hogRidersP = new ArrayList<HogRider>();
+		cannonsP = new ArrayList<Cannon>();
+		archerTowersP = new ArrayList<ArcherTower>();
+		wallsP = new ArrayList<Wall>();
+		mortarsP = new ArrayList<Mortar>();
+		wizardTowersP = new ArrayList<WizardTower>();
 	}
 }

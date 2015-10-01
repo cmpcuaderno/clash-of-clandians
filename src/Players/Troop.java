@@ -8,8 +8,20 @@ public class Troop {
 	protected double hitpoints; // amount of health; amount of damage to be inflicted on the troop before it dies
 	private int x, y; // x- and y-position in the game frame
 	protected Defense focus; // defense building the troop is set to attack
+	private int inEnemyCampNo; //enemy camp where the troop is deployed
 	
 	// getters
+	int getEnemyCamp(){
+		return inEnemyCampNo;
+	}
+	int getX(){
+		return x;
+	}
+
+	int getY(){
+		return y;
+	}
+	
 	int getMovementSpeed(){
 		return movementSpeed;
 	}
@@ -31,6 +43,14 @@ public class Troop {
 	}
 	
 	//methods
+	void deploy(int enemy) {
+		this.inEnemyCampNo = enemy;
+	}
+	
+	void position(int x, int y) {
+		this.x = x;
+		this.y = y;
+	}
 	void setFocus(Defense d){
 		focus = d;
 	}

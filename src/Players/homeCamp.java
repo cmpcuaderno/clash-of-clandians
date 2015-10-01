@@ -2,6 +2,7 @@ package Players;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -10,8 +11,9 @@ import java.awt.event.MouseListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class homeCamp extends JPanel implements ActionListener, MouseListener{
+public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 	JButton cannon, archerTower, mortar, wizardTower, wall; //defense buildings
+	JButton attack; // go to enemy camp
 	Camp camp; //type of camp
 	boolean toPlaceDef; //if player is to position/reposition a building
 	Defense defToPlace; //defense building to position; will be repositioned if toPlaceDef==true
@@ -20,7 +22,7 @@ public class homeCamp extends JPanel implements ActionListener, MouseListener{
 	Color cannonC, archerC, mortarC, wizardC, wallC; //buildings
 	JPanel field, buttons;
 	
-	public homeCamp(Camp camp) {
+	public HomeCamp(Camp camp) {
 		//colors
 		unselected = new Color(255,255,255);
 		empty = new Color(175,175,175);
@@ -32,11 +34,13 @@ public class homeCamp extends JPanel implements ActionListener, MouseListener{
 		
 		//panels
 		setLayout(new BorderLayout());
-		field = new homeCampField(camp); //actual game field
+		field = new CampField(camp, true, camp, 0); //actual game field
 		field.addMouseListener(this);
 		buttons = new JPanel(); //buttons for positioning buildings
+		buttons.setLayout(new GridLayout(2,3,1,1));
 		
 		this.camp = camp;
+		attack = new JButton("Attack!");
 		cannon = new JButton("Cannons (" + this.camp.cannons.size() + ")");
 		archerTower = new JButton("Archer Towers (" + this.camp.archerTowers.size() + ")");
 		mortar = new JButton("Mortars (" + this.camp.mortars.size() + ")");
@@ -63,6 +67,7 @@ public class homeCamp extends JPanel implements ActionListener, MouseListener{
 		buttons.add(mortar);
 		buttons.add(wizardTower);
 		buttons.add(wall);
+		buttons.add(attack);
 		add(buttons, BorderLayout.SOUTH);
 		add(field, BorderLayout.CENTER);
 		

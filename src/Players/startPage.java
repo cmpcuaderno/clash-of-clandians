@@ -18,13 +18,13 @@ import javax.swing.JTextField;
  *  	- Number of players
  */
 
-public class startPage extends JPanel implements ActionListener{
+public class StartPage extends JPanel implements ActionListener{
 	JButton start, howToPlay, exit, less, more;
 	JTextField noOfPlayers; //accepts integers from 2 to 6
 	JLabel numberOfPlayers; //text
 	private int players = 2;
 	
-	public startPage() {
+	public StartPage() {
 		
 		//noOfPlayers text field
 		noOfPlayers = new JTextField();

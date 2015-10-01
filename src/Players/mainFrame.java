@@ -3,21 +3,24 @@ package Players;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class mainFrame extends JFrame implements ActionListener{
+public class MainFrame extends JFrame implements ActionListener{
 	JPanel mainPanel;
-	startPage Start;
-	howToPlayPage HowToPlay;
-	chooseCampPage ChooseCamp;
-	mapPage Map;
-	homeCamp HomeCamp;
+	StartPage Start;
+	HowToPlayPage HowToPlay;
+	ChooseCampPage ChooseCamp;
+	MapWaitingPage Map;
+	HomeCamp Home;
+	EnemyCamp Enemy1;
+	Camp enemyCamp; //dummy data
 	int numberOfPlayers, campNo;
 	boolean startGame;
 	
-	public mainFrame() {
+	public MainFrame() {
 		setTitle("Clash of Clandians");
 		GUI();
 		startGame = false;
@@ -29,10 +32,10 @@ public class mainFrame extends JFrame implements ActionListener{
 		mainPanel = new JPanel();
 		
 		//frames
-		Start = new startPage();
-		HowToPlay = new howToPlayPage();
-		ChooseCamp = new chooseCampPage();
-		Map = new mapPage();
+		Start = new StartPage();
+		HowToPlay = new HowToPlayPage();
+		ChooseCamp = new ChooseCampPage();
+		Map = new MapWaitingPage();
 		
 		//button listeners
 		Start.start.addActionListener(this);
@@ -50,22 +53,50 @@ public class mainFrame extends JFrame implements ActionListener{
 		setVisible(true);
 	}
 	
-	homeCamp createCamp(int campNo){
-		if(campNo == 1) return new homeCamp(new Camp1());
-		else if(campNo == 2) return new homeCamp(new Camp2());
-		else return new homeCamp(new Camp3());
+	HomeCamp createCamp(int campNo){
+		HomeCamp h;
+		if(campNo == 1) h = new HomeCamp(new Camp1());
+		else if(campNo == 2) h = new HomeCamp(new Camp2());
+		else h = new HomeCamp(new Camp3());
+		h.attack.addActionListener(this);
+		return h;
 	}
 
 	void goToHomeCamp(){
 		mainPanel.removeAll();
-		HomeCamp = createCamp(campNo);
-		mainPanel.add(HomeCamp);
+		mainPanel.add(Home);
 		repaint();
 		revalidate();
 	}
+	
+	void dummyData() { //dummy enemy camp
+		Random rX = new Random(), rY = new Random();
+		enemyCamp = new Camp1();
+		while(enemyCamp.cannons.size() != 0) {
+			enemyCamp.cannons.get(0).position(rX.nextInt(600), rY.nextInt(400));
+			enemyCamp.cannonsP.add(enemyCamp.cannons.remove(0));
+		}
+		while(enemyCamp.archerTowers.size() != 0) {
+			enemyCamp.archerTowers.get(0).position(rX.nextInt(600), rY.nextInt(400));
+			enemyCamp.archerTowersP.add(enemyCamp.archerTowers.remove(0));
+		}
+		while(enemyCamp.mortars.size() != 0) {
+			enemyCamp.mortars.get(0).position(rX.nextInt(600), rY.nextInt(400));
+			enemyCamp.mortarsP.add(enemyCamp.mortars.remove(0));
+		}
+		while(enemyCamp.wizardTowers.size() != 0) {
+			enemyCamp.wizardTowers.get(0).position(rX.nextInt(600), rY.nextInt(400));
+			enemyCamp.wizardTowersP.add(enemyCamp.wizardTowers.remove(0));
+		}
+		while(enemyCamp.walls.size() != 0) {
+			enemyCamp.walls.get(0).position(rX.nextInt(600), rY.nextInt(400));
+			enemyCamp.wallsP.add(enemyCamp.walls.remove(0));
+		}
+		Enemy1 = new EnemyCamp(enemyCamp, Home.camp);
+		Enemy1.home.addActionListener(this);
+	}
 
 	public void actionPerformed(ActionEvent e) {
-		
 		//START PAGE
 		if(e.getSource() == Start.start) { // Start button
 			numberOfPlayers = Start.getNumberOfPlayers();
@@ -75,20 +106,20 @@ public class mainFrame extends JFrame implements ActionListener{
 			revalidate();
 		}
 		
-		if(e.getSource() == Start.howToPlay) { // How to Play button
+		else if(e.getSource() == Start.howToPlay) { // How to Play button
 			mainPanel.remove(Start);
 			mainPanel.add(HowToPlay);
 			repaint();
 			revalidate();
 		}
 
-		if(e.getSource() == Start.exit) { //Exit button
+		else if(e.getSource() == Start.exit) { //Exit button
 			System.exit(0);
 		}
 		
 		
 		// HOW TO PLAY PAGE
-		if(e.getSource() == HowToPlay.back) { // back button
+		else if(e.getSource() == HowToPlay.back) { // back button
 			mainPanel.remove(HowToPlay);
 			mainPanel.add(Start);
 			repaint();
@@ -96,14 +127,14 @@ public class mainFrame extends JFrame implements ActionListener{
 		}
 		
 		// CHOOSE CAMP PAGE
-		if(e.getSource() == ChooseCamp.back) { // back button for choose camp
+		else if(e.getSource() == ChooseCamp.back) { // back button for choose camp
 			mainPanel.remove(ChooseCamp);
 			mainPanel.add(Start);
 			repaint();
 			revalidate();
 		}
 
-		if(e.getSource() == ChooseCamp.camp1) { // choosing camp 1
+		else if(e.getSource() == ChooseCamp.camp1) { // choosing camp 1
 			campNo = 1; // predefined camp 1
 			mainPanel.remove(ChooseCamp);
 			Map.setMap(numberOfPlayers);
@@ -111,10 +142,9 @@ public class mainFrame extends JFrame implements ActionListener{
 			repaint();
 			revalidate();
 			startGame = true; //server should change this
-			HomeCamp = new homeCamp(new Camp1());
 		}
 
-		if(e.getSource() == ChooseCamp.camp2) { // choosing camp 2
+		else if(e.getSource() == ChooseCamp.camp2) { // choosing camp 2
 			campNo = 2; // predefined camp 2
 			mainPanel.remove(ChooseCamp);
 			Map.setMap(numberOfPlayers);
@@ -122,10 +152,9 @@ public class mainFrame extends JFrame implements ActionListener{
 			repaint();
 			revalidate();
 			startGame = true; //server should change this
-			HomeCamp = new homeCamp(new Camp2());
 		}
 
-		if(e.getSource() == ChooseCamp.camp3) { // choosing camp 3
+		else if(e.getSource() == ChooseCamp.camp3) { // choosing camp 3
 			campNo = 3; // predefined camp 3
 			mainPanel.remove(ChooseCamp);
 			Map.setMap(numberOfPlayers);
@@ -133,7 +162,17 @@ public class mainFrame extends JFrame implements ActionListener{
 			repaint();
 			revalidate();
 			startGame = true; //server should change this
-			HomeCamp = new homeCamp(new Camp3());
+		}
+		
+		else if(e.getSource() == Home.attack) { // going to enemy camp
+			mainPanel.remove(Home);
+			mainPanel.add(Enemy1);
+			repaint();
+			revalidate();
+		}
+		
+		else if(e.getSource() == Enemy1.home) { // going to enemy camp
+			goToHomeCamp();
 		}
 	}
 }

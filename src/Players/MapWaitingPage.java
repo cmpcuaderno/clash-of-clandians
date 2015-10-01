@@ -5,10 +5,10 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class mapPage extends JPanel{
+public class MapWaitingPage extends JPanel{
 	JLabel[] p;
 	
-	public mapPage(){
+	public MapWaitingPage(){
 		setLayout(new GridLayout(2,3));
 		
 		// players (pakipalitan ito ng kung anumang magrerepresent sa bawat player)

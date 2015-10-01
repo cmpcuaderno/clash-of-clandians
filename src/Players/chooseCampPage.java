@@ -3,10 +3,10 @@ package Players;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-public class chooseCampPage extends JPanel{
+public class ChooseCampPage extends JPanel{
 	JButton camp1, camp2, camp3, back;
 	
-	public chooseCampPage(){
+	public ChooseCampPage(){
 		camp1 = new JButton("CAMP 1");
 		camp2 = new JButton("CAMP 2");
 		camp3 = new JButton("CAMP 3");
