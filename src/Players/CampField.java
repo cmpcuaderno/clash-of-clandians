@@ -17,13 +17,14 @@ public class CampField extends JPanel{
 		this.camp = camp;
 		this.home = home;
 		this.isHome = isHome;
+		this.enemyNo = enemyNo;
 		setLayout(new GridLayout(20,25, 1, 1));
 		
 		//tiles
 		tile = new BuildingTile[20][25];
 		for(int i=0; i<20; i++) { //each row of tiles
 			for(int j=0; j<25; j++) { //each tile
-				tile[i][j] = new BuildingTile(i,j);
+				tile[i][j] = new BuildingTile(i,j, camp, home);
 				add(tile[i][j]);
 			}
 		}
@@ -55,6 +56,96 @@ public class CampField extends JPanel{
 		distance = (int) Math.ceil(Math.sqrt(Math.pow(t.getX()-positionXd, 2) + Math.pow(t.getY()-positionYd, 2)));
 		
 		return distance; //Euclidean distance
+	}
+	
+	void findClosestTroop(Defense d) { //finds deployed troop closest to enemy building d
+		Troop t = null;
+		int i=0;
+		
+		while(i != home.barbariansP.size()) { //for each barbarian
+			if(home.barbariansP.get(i).getEnemyCamp() == enemyNo) {
+				if(i == 0) t = home.barbariansP.get(0);
+				else {
+					if(getDistance(t, d) > getDistance(home.barbariansP.get(i), d))
+						t = home.barbariansP.get(i);
+				}
+			}
+			i++;
+		}
+		
+		i=0;
+		while(i != home.archersP.size()) { //for each archer
+			if(home.archersP.get(i).getEnemyCamp() == enemyNo) {
+				if(t == null) t = home.archersP.get(0);
+				else {
+					if(getDistance(t, d) > getDistance(home.archersP.get(i), d))
+						t = home.archersP.get(i);
+				}
+			}
+			i++;
+		}
+		
+		i=0;
+		while(i != home.giantsP.size()) { //for each giant
+			if(home.giantsP.get(i).getEnemyCamp() == enemyNo) {
+				if(t == null) t = home.giantsP.get(0);
+				else {
+					if(getDistance(t, d) > getDistance(home.giantsP.get(i), d))
+						t = home.giantsP.get(i);
+				}
+			}
+			i++;
+		}
+		
+		i=0;
+		while(i != home.wizardsP.size()) { //for each wizard
+			if(home.wizardsP.get(i).getEnemyCamp() == enemyNo) {
+				if(t == null) t = home.wizardsP.get(0);
+				else {
+					if(getDistance(t, d) > getDistance(home.wizardsP.get(i), d))
+						t = home.wizardsP.get(i);
+				}
+			}
+			i++;
+		}
+		
+		i=0;
+		while(i != home.dragonsP.size()) { //for each dragon
+			if(home.dragonsP.get(i).getEnemyCamp() == enemyNo) {
+				if(t == null) t = home.dragonsP.get(0);
+				else {
+					if(getDistance(t, d) > getDistance(home.dragonsP.get(i), d))
+						t = home.dragonsP.get(i);
+				}
+			}
+			i++;
+		}
+		
+		i=0;
+		while(i != home.wallBreakersP.size()) { //for each wall breaker
+			if(camp.wallBreakersP.get(i).getEnemyCamp() == enemyNo) {
+				if(t == null) t = home.wallBreakersP.get(0);
+				else {
+					if(getDistance(t, d) > getDistance(home.wallBreakersP.get(i), d))
+						t = home.giantsP.get(i);
+				}
+			}
+			i++;
+		}
+		
+		i=0;
+		while(i != home.hogRidersP.size()) { //for each hog rider
+			if(home.hogRidersP.get(i).getEnemyCamp() == enemyNo) {
+				if(t == null) t = home.hogRidersP.get(0);
+				else {
+					if(getDistance(t, d) > getDistance(home.hogRidersP.get(i), d))
+						t = home.hogRidersP.get(i);
+				}
+			}
+			i++;
+		}
+		
+		d.setFocus(t);
 	}
 	
 	void findClosestBuilding(Troop t) { //finds positioned enemy building closest to troop t

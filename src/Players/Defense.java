@@ -3,10 +3,12 @@ package Players;
 public class Defense {
 	protected double hitpoints; // amount of damage to be inflicted on the building before it is destroyed
 	protected double damage; // amount of damage it can inflict on a troop
-	protected double attackSpeed; // how fast the defense throw in attacks on the troops	
+	protected int attackSpeed; // how fast the defense throw in attacks on the troops	
+	protected int range; // how far the troop has to be form the building before the building starts attacking the troop
 	protected int x, y; // x- and y-position in the game frame
 	private Troop focus; // troop the defense building is set to attack
 	protected int type; // 1- cannon; 2- archer tower; 3- mortar; 4- wizard tower; 5- wall; 6- town hall
+	BuildingAttack attacker;
 	
 	//getters
 	int getType(){
@@ -21,8 +23,12 @@ public class Defense {
 		return damage;
 	}
 	
-	double getAttackSpeed(){
+	int getAttackSpeed(){
 		return attackSpeed;
+	}
+	
+	int getRange() {
+		return range;
 	}
 	
 	int getX(){
@@ -31,6 +37,9 @@ public class Defense {
 	
 	int getY(){
 		return y;
+	}
+	Troop getFocus() {
+		return focus;
 	}
 	
 	//methods
@@ -49,7 +58,7 @@ public class Defense {
 	
 	void receiveAttack(Troop t) { //receive attack from troop
 		hitpoints = hitpoints - t.getDamage();
-		System.out.println("Type " + type + " hp remaining: " + hitpoints);
+		System.out.println("Building type " + type + " hp remaining: " + hitpoints);
 	}
 	
 }

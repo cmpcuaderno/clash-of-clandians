@@ -9,13 +9,17 @@ import javax.swing.JPanel;
 public class BuildingTile extends JPanel{ //one 20x20 pixel tile where buildings are positioned
 	private int positionX, positionY; //tile's position in the field/canvas
 	private Defense occupant; //building that occupies the tile
+	Camp camp; //which camp the tile belongs to
+	Camp ally; //home camp
 	Troop[] t; //troops that occupy the tile, 10x10 each
 	boolean isOccupied = false; //if true, tile is occupied by either building or troop, and player cannot place another building on it
 	JPanel troopTile[];
 	
-	public BuildingTile(int x, int y) {
+	public BuildingTile(int x, int y, Camp camp, Camp ally) {
 		this.positionX = x;
 		this.positionY = y;
+		this.camp = camp;
+		this.ally = ally;
 		setLayout(new GridLayout(2,2));
 		t = new Troop[4];
 		
@@ -45,9 +49,10 @@ public class BuildingTile extends JPanel{ //one 20x20 pixel tile where buildings
 		return occupant;
 	}
 	
-	void occupy(Defense d) { //place building on tile
+	void occupy(Defense d, CampField f) { //place building on tile
 		occupant = d;
 		isOccupied = true;
+		d.attacker = new BuildingAttack(d, f, ally);
 		
 		//coloring the tile
 		for(int i=0; i<4; i++) troopTile[i].setBackground(Colors.buildingColor[d.getType()]);

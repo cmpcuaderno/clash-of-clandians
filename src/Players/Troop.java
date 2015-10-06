@@ -11,6 +11,8 @@ public class Troop {
 	private int inEnemyCampNo; //enemy camp where the troop is deployed
 	protected int type; //0- barbarian, 1- archer, 2-giant, 3- wizard, 4- dragon, 5- wallbreaker, 6- hogrider
 	boolean inPosition = false; //toggles true if focus building is in range of the troop; if true, attack begins
+	TroopAttack attacker;
+	TroopMove mover;
 	
 	// getters
 	int getType(){
@@ -86,6 +88,7 @@ public class Troop {
 	
 	void receiveAttack(Defense d){
 		hitpoints = hitpoints - d.getDamage();
+		System.out.println("Troop type " + type + " hp remaining: " + hitpoints);
 	}
 	
 }

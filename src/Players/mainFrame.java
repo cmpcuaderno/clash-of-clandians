@@ -73,7 +73,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		Random rX = new Random(), rY = new Random();
 		int randomX = rX.nextInt(25), randomY = rY.nextInt(20);
 		enemyCamp = new Camp1();
-		Enemy1 = new EnemyCamp(enemyCamp, Home.camp);
+		Enemy1 = new EnemyCamp(enemyCamp, Home.camp, 1);
 		Enemy1.home.addActionListener(this);
 		
 		while(enemyCamp.cannons.size() != 0) {
@@ -82,7 +82,7 @@ public class MainFrame extends JFrame implements ActionListener{
 				randomX = rX.nextInt(20);
 			}
 			enemyCamp.cannons.get(0).position(randomX, randomY);
-			Enemy1.field.tile[randomY][randomX].occupy(enemyCamp.cannons.get(0));
+			Enemy1.field.tile[randomY][randomX].occupy(enemyCamp.cannons.get(0), Enemy1.field);
 			enemyCamp.cannonsP.add(enemyCamp.cannons.remove(0));
 		}
 		while(enemyCamp.archerTowers.size() != 0) {
@@ -91,7 +91,7 @@ public class MainFrame extends JFrame implements ActionListener{
 				randomX = rX.nextInt(20);
 			}
 			enemyCamp.archerTowers.get(0).position(randomX, randomY);
-			Enemy1.field.tile[randomY][randomX].occupy(enemyCamp.archerTowers.get(0));
+			Enemy1.field.tile[randomY][randomX].occupy(enemyCamp.archerTowers.get(0), Enemy1.field);
 			enemyCamp.archerTowersP.add(enemyCamp.archerTowers.remove(0));
 		}
 		while(enemyCamp.mortars.size() != 0) {
@@ -100,7 +100,7 @@ public class MainFrame extends JFrame implements ActionListener{
 				randomX = rX.nextInt(20);
 			}
 			enemyCamp.mortars.get(0).position(randomX, randomY);
-			Enemy1.field.tile[randomY][randomX].occupy(enemyCamp.mortars.get(0));
+			Enemy1.field.tile[randomY][randomX].occupy(enemyCamp.mortars.get(0), Enemy1.field);
 			enemyCamp.mortarsP.add(enemyCamp.mortars.remove(0));
 		}
 		while(enemyCamp.wizardTowers.size() != 0) {
@@ -109,7 +109,7 @@ public class MainFrame extends JFrame implements ActionListener{
 				randomX = rX.nextInt(20);
 			}
 			enemyCamp.wizardTowers.get(0).position(randomX, randomY);
-			Enemy1.field.tile[randomY][randomX].occupy(enemyCamp.wizardTowers.get(0));
+			Enemy1.field.tile[randomY][randomX].occupy(enemyCamp.wizardTowers.get(0), Enemy1.field);
 			enemyCamp.wizardTowersP.add(enemyCamp.wizardTowers.remove(0));
 		}
 		while(enemyCamp.walls.size() != 0) {
@@ -118,10 +118,10 @@ public class MainFrame extends JFrame implements ActionListener{
 				randomX = rX.nextInt(20);
 			}
 			enemyCamp.walls.get(0).position(randomX, randomY);
-			Enemy1.field.tile[randomY][randomX].occupy(enemyCamp.walls.get(0));
+			Enemy1.field.tile[randomY][randomX].occupy(enemyCamp.walls.get(0), Enemy1.field);
 			enemyCamp.wallsP.add(enemyCamp.walls.remove(0));
 		}
-		Enemy1.field.tile[enemyCamp.townHall.getY()][enemyCamp.townHall.getX()].occupy(enemyCamp.townHall);
+		Enemy1.field.tile[enemyCamp.townHall.getY()][enemyCamp.townHall.getX()].occupy(enemyCamp.townHall, Home.field);
 	}
 
 	public void actionPerformed(ActionEvent e) {

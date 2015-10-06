@@ -21,13 +21,12 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 	Troop troopToPlace; //selected troop to deploy
 	int troopType; //type of troop to deploy; 1=barbarian, 2=archer, 3=giant, 4=wizard, 5=dragon, 6=wallbreaker, 7=hogrider
 	int enemyNo; //identification
-	TroopMove mover; //timer which triggers the troop to move
-	TroopAttack troopAttack;
 	
-	public EnemyCamp(Camp enemyCamp, Camp allyCamp) {
+	public EnemyCamp(Camp enemyCamp, Camp allyCamp, int enemyNo) {
 		//camps
 		this.allyCamp = allyCamp;
 		this.enemyCamp = enemyCamp;
+		this.enemyNo = enemyNo;
 		
 		
 		//panels
@@ -185,8 +184,8 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 			
 			disableButtons(); //check for empty queues
 			field.findClosestBuilding(troopToPlace);
-			mover = new TroopMove(troopToPlace, field); //make troop move
-			troopAttack = new TroopAttack(troopToPlace, field, enemyCamp, mover.timer);
+			troopToPlace.mover = new TroopMove(troopToPlace, field); //make troop move
+			troopToPlace.attacker = new TroopAttack(troopToPlace, field, enemyCamp, troopToPlace.mover.timer);
 		}
 	}
 

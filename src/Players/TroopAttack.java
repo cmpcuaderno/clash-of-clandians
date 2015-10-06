@@ -25,6 +25,8 @@ public class TroopAttack implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		if(t.inPosition) t.attack(); //if building is in range, attack!
 		if(t.focus.getHitpoints() <= 0) { //if building is destroyed
+			//stop attacking
+			t.focus.attacker.timer.stop();
 			//vacate tile from field
 			field.tile[t.focus.getY()][t.focus.getX()].destroyBuilding();
 			//remove from linked list of positioned buildings

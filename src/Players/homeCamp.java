@@ -32,7 +32,7 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 		buttons.setPreferredSize(new Dimension(500,50));
 		
 		//position town hall
-		field.tile[camp.townHall.getY()][camp.townHall.getX()].occupy(camp.townHall);
+		field.tile[camp.townHall.getY()][camp.townHall.getX()].occupy(camp.townHall, field);
 		
 		this.camp = camp;
 		attack = new JButton("Attack!");
@@ -184,7 +184,7 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 				}
 				defToPlace.position(e.getX()/20, e.getY()/20);
 				camp.cannonsP.add((Cannon) defToPlace); //remove from queue, add to "positioned" list
-				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace);
+				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace, field);
 				cannon.setText("Cannons (" + camp.cannons.size() + ")");
 			}
 
@@ -196,7 +196,7 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 				}
 				defToPlace.position(e.getX()/20, e.getY()/20);
 				camp.archerTowersP.add((ArcherTower) defToPlace); //remove from queue, add to "positioned" list
-				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace);
+				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace, field);
 				archerTower.setText("Archer Towers (" + camp.archerTowers.size() + ")");
 			}
 
@@ -208,7 +208,7 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 				}
 				defToPlace.position(e.getX()/20, e.getY()/20);
 				camp.mortarsP.add((Mortar) defToPlace); //remove from queue, add to "positioned" list
-				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace);
+				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace, field);
 				mortar.setText("Mortars (" + camp.mortars.size() + ")");
 			}
 
@@ -220,7 +220,7 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 				}
 				defToPlace.position(e.getX()/20, e.getY()/20);
 				camp.wizardTowersP.add((WizardTower) defToPlace); //remove from queue, add to "positioned" list
-				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace);
+				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace, field);
 				wizardTower.setText("Wizard Towers (" + camp.wizardTowers.size() + ")");
 			}
 
@@ -232,7 +232,7 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 				}
 				defToPlace.position(e.getX()/20, e.getY()/20);
 				camp.wallsP.add((Wall) defToPlace); //remove from queue, add to "positioned" list
-				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace);
+				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace, field);
 				wall.setText("Walls (" + camp.walls.size() + ")");
 			}
 			
