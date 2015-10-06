@@ -2,8 +2,8 @@ package Players;
 
 public class Troop {
 	protected int movementSpeed; // how fast the troop walks/changes position
-	protected double attackSpeed; // how fast the troop attacks
-	protected double range; // how far can the troop reach to attack
+	protected int attackSpeed; // how fast the troop attacks
+	protected int range; // how far can the troop reach to attack
 	protected double damage; // amount of damage inflicted per shot
 	protected double hitpoints; // amount of health; amount of damage to be inflicted on the troop before it dies
 	private int x, y; // x- and y-position in the game frame
@@ -43,11 +43,11 @@ public class Troop {
 		return movementSpeed;
 	}
 
-	double getAttackSpeed(){
+	int getAttackSpeed(){
 		return attackSpeed;
 	}
 
-	double getRange(){
+	int getRange(){
 		return range;
 	}
 

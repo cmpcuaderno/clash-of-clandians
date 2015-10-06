@@ -49,6 +49,7 @@ public class Defense {
 	
 	void receiveAttack(Troop t) { //receive attack from troop
 		hitpoints = hitpoints - t.getDamage();
+		System.out.println("Type " + type + " hp remaining: " + hitpoints);
 	}
 	
 }

@@ -110,7 +110,7 @@ public class CampField extends JPanel{
 			i++;
 		}
 		
-		if(d == null || getDistance(t, d) > getDistance(t, camp.townHall)) d = camp.townHall;
+		if(d == null || (camp.townHall != null && getDistance(t, d) > getDistance(t, camp.townHall))) d = camp.townHall;
 		
 		t.setFocus(d); //troop sets focus on closest building
 	}

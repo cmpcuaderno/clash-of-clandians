@@ -3,7 +3,7 @@ package Players;
 public class Wizard extends Troop{
 	public Wizard() {
 		movementSpeed = 16;
-		attackSpeed = 1.5;
+		attackSpeed = 2;
 		range = 3;
 		damage = 75;
 		hitpoints = 75;

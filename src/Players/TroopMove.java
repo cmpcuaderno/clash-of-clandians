@@ -13,18 +13,18 @@ public class TroopMove implements ActionListener{
 	public TroopMove(Troop t, CampField enemyCamp) {
 		this.t = t;
 		this.enemyCamp = enemyCamp;
-		timer = new Timer(t.getMovementSpeed()*100, this);
-		timer.setInitialDelay(t.getMovementSpeed()*100);
+		timer = new Timer(5000/t.getMovementSpeed(), this);
+		timer.setInitialDelay(5000/t.getMovementSpeed());
 		timer.start();
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		if(t.focus.getHitpoints() == 0 || enemyCamp.getDistance(t, t.focus) <= (int) t.getRange()){
+		if(enemyCamp.getDistance(t, t.focus) <= t.getRange()){
+			System.out.println("Type " + t.getType() + " is in position.");
 			timer.stop();
 			t.inPosition = true; //ready to attack
 		}
 		else enemyCamp.moveTroop(t);
-		System.out.println(enemyCamp.getDistance(t, t.focus));
 	}
 
 }
