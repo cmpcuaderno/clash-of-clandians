@@ -7,6 +7,7 @@ public class WallBreaker extends Troop{
 		range = 1;
 		damage = 480;
 		hitpoints = 20;
+		type = 5;
 	}
 	
 	void attack() {

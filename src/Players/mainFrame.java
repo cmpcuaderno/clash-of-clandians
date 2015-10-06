@@ -71,29 +71,57 @@ public class MainFrame extends JFrame implements ActionListener{
 	
 	void dummyData() { //dummy enemy camp
 		Random rX = new Random(), rY = new Random();
+		int randomX = rX.nextInt(25), randomY = rY.nextInt(20);
 		enemyCamp = new Camp1();
+		Enemy1 = new EnemyCamp(enemyCamp, Home.camp);
+		Enemy1.home.addActionListener(this);
+		
 		while(enemyCamp.cannons.size() != 0) {
-			enemyCamp.cannons.get(0).position(rX.nextInt(600), rY.nextInt(400));
+			while(Enemy1.field.tile[randomY][randomX].isOccupied){
+				randomY = rY.nextInt(20);
+				randomX = rX.nextInt(20);
+			}
+			enemyCamp.cannons.get(0).position(randomX, randomY);
+			Enemy1.field.tile[randomY][randomX].occupy(enemyCamp.cannons.get(0));
 			enemyCamp.cannonsP.add(enemyCamp.cannons.remove(0));
 		}
 		while(enemyCamp.archerTowers.size() != 0) {
-			enemyCamp.archerTowers.get(0).position(rX.nextInt(600), rY.nextInt(400));
+			while(Enemy1.field.tile[randomY][randomX].isOccupied){
+				randomY = rY.nextInt(20);
+				randomX = rX.nextInt(20);
+			}
+			enemyCamp.archerTowers.get(0).position(randomX, randomY);
+			Enemy1.field.tile[randomY][randomX].occupy(enemyCamp.archerTowers.get(0));
 			enemyCamp.archerTowersP.add(enemyCamp.archerTowers.remove(0));
 		}
 		while(enemyCamp.mortars.size() != 0) {
-			enemyCamp.mortars.get(0).position(rX.nextInt(600), rY.nextInt(400));
+			while(Enemy1.field.tile[randomY][randomX].isOccupied){
+				randomY = rY.nextInt(20);
+				randomX = rX.nextInt(20);
+			}
+			enemyCamp.mortars.get(0).position(randomX, randomY);
+			Enemy1.field.tile[randomY][randomX].occupy(enemyCamp.mortars.get(0));
 			enemyCamp.mortarsP.add(enemyCamp.mortars.remove(0));
 		}
 		while(enemyCamp.wizardTowers.size() != 0) {
-			enemyCamp.wizardTowers.get(0).position(rX.nextInt(600), rY.nextInt(400));
+			while(Enemy1.field.tile[randomY][randomX].isOccupied){
+				randomY = rY.nextInt(20);
+				randomX = rX.nextInt(20);
+			}
+			enemyCamp.wizardTowers.get(0).position(randomX, randomY);
+			Enemy1.field.tile[randomY][randomX].occupy(enemyCamp.wizardTowers.get(0));
 			enemyCamp.wizardTowersP.add(enemyCamp.wizardTowers.remove(0));
 		}
 		while(enemyCamp.walls.size() != 0) {
-			enemyCamp.walls.get(0).position(rX.nextInt(600), rY.nextInt(400));
+			while(Enemy1.field.tile[randomY][randomX].isOccupied){
+				randomY = rY.nextInt(20);
+				randomX = rX.nextInt(20);
+			}
+			enemyCamp.walls.get(0).position(randomX, randomY);
+			Enemy1.field.tile[randomY][randomX].occupy(enemyCamp.walls.get(0));
 			enemyCamp.wallsP.add(enemyCamp.walls.remove(0));
 		}
-		Enemy1 = new EnemyCamp(enemyCamp, Home.camp);
-		Enemy1.home.addActionListener(this);
+		Enemy1.field.tile[enemyCamp.townHall.getY()][enemyCamp.townHall.getX()].occupy(enemyCamp.townHall);
 	}
 
 	public void actionPerformed(ActionEvent e) {

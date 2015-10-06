@@ -8,6 +8,7 @@ public class Archer extends Troop{
 		range = 3.5;
 		damage = 7;
 		hitpoints = 20;
+		type = 1;
 	}
 
 }

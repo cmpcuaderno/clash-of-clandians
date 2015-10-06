@@ -5,5 +5,6 @@ public class ArcherTower extends Defense{
 		hitpoints = 380;
 		damage = 5.5;
 		attackSpeed = 0.5;
+		type = 1;
 	}
 }

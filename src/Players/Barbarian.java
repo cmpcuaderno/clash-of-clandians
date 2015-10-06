@@ -8,5 +8,6 @@ public class Barbarian extends Troop{
 		range = 0.4;
 		damage = 8;
 		hitpoints = 45;
+		type = 0;
 	}
 }

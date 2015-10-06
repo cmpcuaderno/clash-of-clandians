@@ -7,5 +7,6 @@ public class HogRider extends Troop{
 		range = 0.6;
 		damage = 60;
 		hitpoints = 270;
+		type = 6;
 	}	
 }

@@ -5,5 +5,6 @@ public class Wall extends Defense{
 		hitpoints = 300;
 		damage = 0;
 		attackSpeed = 0;
+		type = 4;
 	}
 }

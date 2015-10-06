@@ -5,5 +5,6 @@ public class Mortar extends Defense{
 		hitpoints = 400;
 		damage = 20;
 		attackSpeed = 5;
+		type = 2;
 	}
 }

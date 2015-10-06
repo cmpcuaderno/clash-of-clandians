@@ -5,5 +5,6 @@ public class Cannon extends Defense{
 		hitpoints = 420;
 		damage = 7.2;
 		attackSpeed = 0.8;
+		type = 0;
 	}
 }

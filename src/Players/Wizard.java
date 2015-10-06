@@ -7,5 +7,6 @@ public class Wizard extends Troop{
 		range = 3;
 		damage = 75;
 		hitpoints = 75;
+		type = 3;
 	}
 }

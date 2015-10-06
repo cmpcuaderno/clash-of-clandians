@@ -9,8 +9,12 @@ public class Troop {
 	private int x, y; // x- and y-position in the game frame
 	protected Defense focus; // defense building the troop is set to attack
 	private int inEnemyCampNo; //enemy camp where the troop is deployed
+	protected int type; //0- barbarian, 1- archer, 2-giant, 3- wizard, 4- dragon, 5- wallbreaker, 6- hogrider
 	
 	// getters
+	int getType(){
+		return type;
+	}
 	int getEnemyCamp(){
 		return inEnemyCampNo;
 	}

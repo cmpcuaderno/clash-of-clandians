@@ -7,5 +7,6 @@ public class Giant extends Troop{
 		range = 1;
 		damage = 22;
 		hitpoints = 300;
+		type = 2;
 	}
 }

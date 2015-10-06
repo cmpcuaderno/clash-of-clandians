@@ -2,6 +2,7 @@ package Players;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,26 +19,20 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 	boolean toPlaceDef; //if player is to position/reposition a building
 	Defense defToPlace; //defense building to position; will be repositioned if toPlaceDef==true
 	int defType = 0; //type of defense (button) selected; 1=cannon, 2=archerTower, 3=mortar, wizardTower=4, wall=5
-	Color unselected, empty; // buttons
-	Color cannonC, archerC, mortarC, wizardC, wallC; //buildings
-	JPanel field, buttons;
+	JPanel buttons;
+	CampField field;
 	
-	public HomeCamp(Camp camp) {
-		//colors
-		unselected = new Color(255,255,255);
-		empty = new Color(175,175,175);
-		cannonC =  new Color(0,255,0);
-		archerC =  new Color(255,255,0);
-		mortarC =  new Color(255,0,255);
-		wizardC =  new Color(100,100,0);
-		wallC =  new Color(0,255,255);
-		
+	public HomeCamp(Camp camp) {		
 		//panels
 		setLayout(new BorderLayout());
 		field = new CampField(camp, true, camp, 0); //actual game field
 		field.addMouseListener(this);
 		buttons = new JPanel(); //buttons for positioning buildings
 		buttons.setLayout(new GridLayout(2,3,1,1));
+		buttons.setPreferredSize(new Dimension(500,50));
+		
+		//position town hall
+		field.tile[camp.townHall.getY()][camp.townHall.getX()].occupy(camp.townHall);
 		
 		this.camp = camp;
 		attack = new JButton("Attack!");
@@ -55,11 +50,11 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 		wall.addActionListener(this);
 		
 		//default color if not selected = white
-		cannon.setBackground(unselected);
-		archerTower.setBackground(unselected);
-		mortar.setBackground(unselected);
-		wizardTower.setBackground(unselected);
-		wall.setBackground(unselected);
+		cannon.setBackground(Colors.unselected);
+		archerTower.setBackground(Colors.unselected);
+		mortar.setBackground(Colors.unselected);
+		wizardTower.setBackground(Colors.unselected);
+		wall.setBackground(Colors.unselected);
 		
 		// adding to panel
 		buttons.add(cannon);
@@ -74,122 +69,122 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 	}
 	
 	void disableButtons(){ //checks for empty queues, disables button
-		if(camp.cannons.size() == 0) cannon.setBackground(empty);
-		if(camp.archerTowers.size() == 0) archerTower.setBackground(empty);
-		if(camp.mortars.size() == 0) mortar.setBackground(empty);
-		if(camp.wizardTowers.size() == 0) wizardTower.setBackground(empty);
-		if(camp.walls.size() == 0) wall.setBackground(empty);
+		if(camp.cannons.size() == 0) cannon.setBackground(Colors.empty);
+		if(camp.archerTowers.size() == 0) archerTower.setBackground(Colors.empty);
+		if(camp.mortars.size() == 0) mortar.setBackground(Colors.empty);
+		if(camp.wizardTowers.size() == 0) wizardTower.setBackground(Colors.empty);
+		if(camp.walls.size() == 0) wall.setBackground(Colors.empty);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == cannon && camp.cannons.size() != 0) { //if cannon button is selected and cannon queue is not empty
 			if(defType == 1) {
 				toPlaceDef = false; //deselect if same button is clicked
-				cannon.setBackground(unselected); //reset color
+				cannon.setBackground(Colors.unselected); //reset color
 				defType = 0; //no button selected
 			}
 			else{
 				//reset colors of other buttons
-				archerTower.setBackground(unselected);
-				mortar.setBackground(unselected);
-				wizardTower.setBackground(unselected);
-				wall.setBackground(unselected);
+				archerTower.setBackground(Colors.unselected);
+				mortar.setBackground(Colors.unselected);
+				wizardTower.setBackground(Colors.unselected);
+				wall.setBackground(Colors.unselected);
 				disableButtons();
 				toPlaceDef = true; //selects cannon button
 				defType = 1; //to place cannon
-				cannon.setBackground(cannonC);
+				cannon.setBackground(Colors.buildingColor[0]);
 			}
 		}
 		
 		if(e.getSource() == archerTower && camp.archerTowers.size() != 0) { //if archerTower button is selected and archerTower queue is not empty
 			if(defType == 2) {
 				toPlaceDef = false; //deselect if same button is clicked
-				archerTower.setBackground(unselected); //reset color
+				archerTower.setBackground(Colors.unselected); //reset color
 				defType = 0; //no button selected
 			}
 			else{
 				//reset colors of other buttons
-				cannon.setBackground(unselected);
-				mortar.setBackground(unselected);
-				wizardTower.setBackground(unselected);
-				wall.setBackground(unselected);
+				cannon.setBackground(Colors.unselected);
+				mortar.setBackground(Colors.unselected);
+				wizardTower.setBackground(Colors.unselected);
+				wall.setBackground(Colors.unselected);
 				disableButtons();
 				toPlaceDef = true; //selects archerTower button
 				defType = 2; //to place archerTower
-				archerTower.setBackground(archerC);
+				archerTower.setBackground(Colors.buildingColor[1]);
 			}
 		}
 		
 		if(e.getSource() == mortar && camp.mortars.size() != 0) { //if mortar button is selected and mortar queue is not empty
 			if(defType == 3) {
 				toPlaceDef = false; //deselect if same button is clicked
-				mortar.setBackground(unselected); //reset color
+				mortar.setBackground(Colors.unselected); //reset color
 				defType = 0; //no button selected
 			}
 			else{
 				//reset colors of other buttons
-				cannon.setBackground(unselected);
-				archerTower.setBackground(unselected);
-				wizardTower.setBackground(unselected);
-				wall.setBackground(unselected);
+				cannon.setBackground(Colors.unselected);
+				archerTower.setBackground(Colors.unselected);
+				wizardTower.setBackground(Colors.unselected);
+				wall.setBackground(Colors.unselected);
 				disableButtons();
 				toPlaceDef = true; //selects mortar button
 				defType = 3; //to place mortar
-				mortar.setBackground(mortarC);
+				mortar.setBackground(Colors.buildingColor[2]);
 			}
 		}
 		
 		if(e.getSource() == wizardTower && camp.wizardTowers.size() != 0) { //if wizardTower button is selected and wizardTower queue is not empty
 			if(defType == 4) {
 				toPlaceDef = false; //deselect if same button is clicked
-				wizardTower.setBackground(unselected); //reset color
+				wizardTower.setBackground(Colors.unselected); //reset color
 				defType = 0; //no button selected
 			}
 			else{
 				//reset colors of other buttons
-				cannon.setBackground(unselected);
-				archerTower.setBackground(unselected);
-				mortar.setBackground(unselected);
-				wall.setBackground(unselected);
+				cannon.setBackground(Colors.unselected);
+				archerTower.setBackground(Colors.unselected);
+				mortar.setBackground(Colors.unselected);
+				wall.setBackground(Colors.unselected);
 				disableButtons();
 				toPlaceDef = true; //selects wizardTower button
 				defType = 4; //to place wizardTower
-				wizardTower.setBackground(wizardC);
+				wizardTower.setBackground(Colors.buildingColor[3]);
 			}
 		}
 
 		if(e.getSource() == wall && camp.walls.size() != 0) { //if wall button is selected and wall queue is not empty
 			if(defType == 5) {
 				toPlaceDef = false; //deselect if same button is clicked
-				wall.setBackground(unselected); //reset color
+				wall.setBackground(Colors.unselected); //reset color
 				defType = 0; //no button selected
 			}
 			else{
 				//reset colors of other buttons
-				cannon.setBackground(unselected);
-				archerTower.setBackground(unselected);
-				mortar.setBackground(unselected);
-				wizardTower.setBackground(unselected);
+				cannon.setBackground(Colors.unselected);
+				archerTower.setBackground(Colors.unselected);
+				mortar.setBackground(Colors.unselected);
+				wizardTower.setBackground(Colors.unselected);
 				disableButtons();
 				toPlaceDef = true; //selects wall button
 				defType = 5; //to place wall
-				wall.setBackground(wallC);
+				wall.setBackground(Colors.buildingColor[4]);
 			}
 		}
 	}
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(toPlaceDef){
+		if(!field.tile[e.getY()/20][e.getX()/20].isOccupied && toPlaceDef){
 			if(defType == 1 && camp.cannons.size() != 0) { //to position cannon from queue
 				defToPlace = camp.cannons.remove(0);
 				if(camp.cannons.size() == 0) {
 					defType = 0; //if queue is empty, deselect
 					toPlaceDef = false;
 				}
-				defToPlace.position(e.getX(), e.getY());
+				defToPlace.position(e.getX()/20, e.getY()/20);
 				camp.cannonsP.add((Cannon) defToPlace); //remove from queue, add to "positioned" list
-				field.paint(getGraphics());
+				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace);
 				cannon.setText("Cannons (" + camp.cannons.size() + ")");
 			}
 
@@ -199,9 +194,9 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 					defType = 0; //if queue is empty, deselect
 					toPlaceDef = false;
 				}
-				defToPlace.position(e.getX(), e.getY());
+				defToPlace.position(e.getX()/20, e.getY()/20);
 				camp.archerTowersP.add((ArcherTower) defToPlace); //remove from queue, add to "positioned" list
-				field.paint(getGraphics());
+				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace);
 				archerTower.setText("Archer Towers (" + camp.archerTowers.size() + ")");
 			}
 
@@ -211,9 +206,9 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 					defType = 0; //if queue is empty, deselect
 					toPlaceDef = false;
 				}
-				defToPlace.position(e.getX(), e.getY());
+				defToPlace.position(e.getX()/20, e.getY()/20);
 				camp.mortarsP.add((Mortar) defToPlace); //remove from queue, add to "positioned" list
-				field.paint(getGraphics());
+				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace);
 				mortar.setText("Mortars (" + camp.mortars.size() + ")");
 			}
 
@@ -223,9 +218,9 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 					defType = 0; //if queue is empty, deselect
 					toPlaceDef = false;
 				}
-				defToPlace.position(e.getX(), e.getY());
+				defToPlace.position(e.getX()/20, e.getY()/20);
 				camp.wizardTowersP.add((WizardTower) defToPlace); //remove from queue, add to "positioned" list
-				field.paint(getGraphics());
+				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace);
 				wizardTower.setText("Wizard Towers (" + camp.wizardTowers.size() + ")");
 			}
 
@@ -235,9 +230,9 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 					defType = 0; //if queue is empty, deselect
 					toPlaceDef = false;
 				}
-				defToPlace.position(e.getX(), e.getY());
+				defToPlace.position(e.getX()/20, e.getY()/20);
 				camp.wallsP.add((Wall) defToPlace); //remove from queue, add to "positioned" list
-				field.paint(getGraphics());
+				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace);
 				wall.setText("Walls (" + camp.walls.size() + ")");
 			}
 			
@@ -245,24 +240,8 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 		}
 	}
 
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mousePressed(MouseEvent e) {
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		
-	}
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
 }
