@@ -1,7 +1,6 @@
 package Players;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -11,6 +10,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 	JButton barbarian, archer, giant, wizard, dragon, wallbreaker, hogrider; //troop buttons
@@ -22,6 +22,7 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 	Troop troopToPlace; //selected troop to deploy
 	int troopType; //type of troop to deploy; 1=barbarian, 2=archer, 3=giant, 4=wizard, 5=dragon, 6=wallbreaker, 7=hogrider
 	int enemyNo; //identification
+	TroopMove mover; //timer which triggers the troop to move
 	
 	public EnemyCamp(Camp enemyCamp, Camp allyCamp) {
 		//camps
@@ -183,6 +184,8 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 			}
 			
 			disableButtons(); //check for empty queues
+			field.findClosestBuilding(troopToPlace);
+			mover = new TroopMove(troopToPlace, field); //make troop move
 		}
 	}
 

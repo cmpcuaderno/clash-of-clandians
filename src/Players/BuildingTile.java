@@ -41,6 +41,10 @@ public class BuildingTile extends JPanel{ //one 20x20 pixel tile where buildings
 		return positionY*4;
 	}
 	
+	Defense getOccupant(){
+		return occupant;
+	}
+	
 	void occupy(Defense d) { //place building on tile
 		occupant = d;
 		isOccupied = true;
