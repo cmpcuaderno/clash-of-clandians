@@ -1,15 +1,22 @@
 package Players;
 
 import java.awt.Dimension;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-
+import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+
 
 public class MainFrame extends JFrame implements ActionListener{
-	JPanel mainPanel;
+	JLabel background;
+	private JLayeredPane lpane = new JLayeredPane();
+	JPanel mainPanel, bgPanel;
 	StartPage Start;
 	HowToPlayPage HowToPlay;
 	ChooseCampPage ChooseCamp;
@@ -28,8 +35,14 @@ public class MainFrame extends JFrame implements ActionListener{
 	
 	void GUI() {
 		setPreferredSize(new Dimension(640,480));
+		setLayout(new BorderLayout());
+		add(lpane, BorderLayout.CENTER);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        lpane.setBounds(0, 0, 640, 400);
+
 		mainPanel = new JPanel();
+		bgPanel = new JPanel();
+		JLabel background = new JLabel(new ImageIcon("../Assets/cover.png"));
 		
 		//frames
 		Start = new StartPage();
@@ -48,7 +61,14 @@ public class MainFrame extends JFrame implements ActionListener{
 		ChooseCamp.back.addActionListener(this);
 		
 		mainPanel.add(Start);
-		add(mainPanel);
+		mainPanel.setBounds(0, 0, 640, 400);
+		mainPanel.setOpaque(false);
+		bgPanel.setBounds(0, 0, 640, 400);
+		bgPanel.setOpaque(false);
+
+		lpane.add(mainPanel, new Integer(1), 0);
+        lpane.add(bgPanel, new Integer(0), 0);
+		//add(mainPanel);
 		pack();
 		setVisible(true);
 	}
