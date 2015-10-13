@@ -36,9 +36,9 @@ public class MainGame implements ActionListener{
 		time.setText(remainingTime/60 + ":" + remainingTime%60);
 		if(remainingTime/60 < 10 && remainingTime%60 >= 10)
 			time.setText("0" + remainingTime/60 + ":" + remainingTime%60);
-		else if(remainingTime%60 < 10 && remainingTime%60 < 10)
+		else if(remainingTime/60 < 10 && remainingTime%60 < 10)
 			time.setText("0" + remainingTime/60 + ":0" + remainingTime%60);
-		else if(remainingTime%60 >= 10 && remainingTime%60 < 10)
+		else if(remainingTime/60 >= 10 && remainingTime%60 < 10)
 			time.setText(remainingTime/60 + ":0" + remainingTime%60);
 		else time.setText(remainingTime/60 + ":" + remainingTime%60);
 		if(remainingTime == 0) { //if time runs out, end game
