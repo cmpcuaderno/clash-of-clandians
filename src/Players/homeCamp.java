@@ -21,6 +21,7 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 	int defType = 0; //type of defense (button) selected; 1=cannon, 2=archerTower, 3=mortar, wizardTower=4, wall=5
 	JPanel buttons;
 	CampField field;
+	boolean gameOver = false;
 	
 	public HomeCamp(Camp camp) {		
 		//panels
@@ -175,7 +176,7 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(!field.tile[e.getY()/20][e.getX()/20].isOccupied && toPlaceDef){
+		if(!gameOver && !field.tile[e.getY()/20][e.getX()/20].isOccupied && toPlaceDef){
 			if(defType == 1 && camp.cannons.size() != 0) { //to position cannon from queue
 				defToPlace = camp.cannons.remove(0);
 				if(camp.cannons.size() == 0) {

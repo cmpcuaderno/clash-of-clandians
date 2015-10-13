@@ -21,6 +21,7 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 	Troop troopToPlace; //selected troop to deploy
 	int troopType; //type of troop to deploy; 1=barbarian, 2=archer, 3=giant, 4=wizard, 5=dragon, 6=wallbreaker, 7=hogrider
 	int enemyNo; //identification
+	boolean gameOver = false;
 	
 	public EnemyCamp(Camp enemyCamp, Camp allyCamp, int enemyNo) {
 		//camps
@@ -90,7 +91,7 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		if(enemyCamp.townHall != null && toPlaceTroop && field.tile[e.getY()/20][e.getX()/20].t[(((e.getY()/10)%20)%2)*2 + ((e.getX()/10)%20)%2] == null){
+		if(!gameOver && enemyCamp.townHall != null && toPlaceTroop && field.tile[e.getY()/20][e.getX()/20].t[(((e.getY()/10)%20)%2)*2 + ((e.getX()/10)%20)%2] == null){
 			if(troopType == 1 && allyCamp.barbarians.size() != 0) { //to position barbarian from queue
 				troopToPlace = allyCamp.barbarians.remove(0);
 				if(allyCamp.barbarians.size() == 0) {
