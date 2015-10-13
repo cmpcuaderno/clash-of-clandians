@@ -3,6 +3,7 @@ package Players;
 import java.util.ArrayList;
 
 public class Camp {
+	private int trophy = 0;
 	//array list of queued defense buildings/troops
 	ArrayList<Barbarian> barbarians;
 	ArrayList<Archer> archers;
@@ -32,4 +33,12 @@ public class Camp {
 	ArrayList<WizardTower> wizardTowersP;
 	
 	TownHall townHall;
+	
+	void getTrophy() {
+		trophy++;
+	}
+	
+	int getTrophyCount() {
+		return trophy;
+	}
 }

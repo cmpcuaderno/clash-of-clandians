@@ -39,6 +39,7 @@ public class TroopAttack implements ActionListener{
 			else if(t.focus.getType() == 5) {
 				//if destroyed building is the enemy's town hall, stop all movements and declare victory!
 				enemy.townHall = null;
+				ally.getTrophy();
 				for(Troop troop: ally.barbariansP){
 					if(troop.getEnemyCamp() == field.enemyNo) {
 						troop.attacker.timer.stop();

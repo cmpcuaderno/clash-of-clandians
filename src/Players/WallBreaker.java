@@ -9,9 +9,4 @@ public class WallBreaker extends Troop{
 		hitpoints = 20;
 		type = 5;
 	}
-	
-	void attack() {
-		focus.receiveAttack(this);
-		hitpoints = 0; //suicide bomber
-	}
 }

@@ -5,24 +5,30 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
 public class MainGame implements ActionListener{
 	JLabel time; //display of timer
+	JLabel trophyCount;
 	int remainingTime = 900; //remaining time in game, in seconds
 	Timer timer;
 	MainFrame game;
 	
 	public MainGame() {
+		JPanel topPanel = new JPanel(new BorderLayout());
 		timer = new Timer(1000, this); //one second
 		time = new JLabel("15:00");
 		game = new MainFrame();
 		while(!game.startGame) {System.out.print("");} // waiting for other players
+		game.add(topPanel, BorderLayout.NORTH);
 		game.Home = game.createCamp(game.campNo);
 		game.dummyData();
 		game.goToHomeCamp();
-		game.add(time, BorderLayout.NORTH);
+		trophyCount = new JLabel("Trophy Count: " + game.Home.camp.getTrophyCount() + "\t\t\t\t\t");
+		topPanel.add(trophyCount, BorderLayout.EAST);
+		topPanel.add(time, BorderLayout.WEST);
 		timer.start();
 	}
 	
@@ -32,6 +38,7 @@ public class MainGame implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
+		trophyCount.setText("Trophy Count: " + game.Home.camp.getTrophyCount() + "\t\t\t\t\t");
 		remainingTime--; //decrease remaining time
 		time.setText(remainingTime/60 + ":" + remainingTime%60);
 		if(remainingTime/60 < 10 && remainingTime%60 >= 10)

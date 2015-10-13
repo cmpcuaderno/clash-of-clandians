@@ -46,7 +46,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		ChooseCamp.camp2.addActionListener(this);
 		ChooseCamp.camp3.addActionListener(this);
 		ChooseCamp.back.addActionListener(this);
-		
+
 		mainPanel.add(Start);
 		add(mainPanel);
 		pack();
