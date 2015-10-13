@@ -43,7 +43,7 @@ public class MainGame implements ActionListener{
 		else time.setText(remainingTime/60 + ":" + remainingTime%60);
 		if(remainingTime == 0) { //if time runs out, end game
 			timer.stop();
-			time.setText("00:00 ----- GAME OVER! Huhubels.");
+			time.setText("00:00 \t\t GAME OVER! Huhubels.");
 			game.Home.gameOver = true;
 			game.Enemy1.gameOver = true;
 			//stop all attacking and moving of all camps
