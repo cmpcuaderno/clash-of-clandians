@@ -90,7 +90,7 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		if(toPlaceTroop && field.tile[e.getY()/20][e.getX()/20].t[(((e.getY()/10)%20)%2)*2 + ((e.getX()/10)%20)%2] == null){
+		if(enemyCamp.townHall != null && toPlaceTroop && field.tile[e.getY()/20][e.getX()/20].t[(((e.getY()/10)%20)%2)*2 + ((e.getX()/10)%20)%2] == null){
 			if(troopType == 1 && allyCamp.barbarians.size() != 0) { //to position barbarian from queue
 				troopToPlace = allyCamp.barbarians.remove(0);
 				if(allyCamp.barbarians.size() == 0) {
