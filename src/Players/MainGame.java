@@ -3,7 +3,7 @@ package Players;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.UIManager;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
@@ -33,11 +33,6 @@ public class MainGame implements ActionListener{
 	}
 	
 	public static void main(String[] args){
-		try {
-            // Set cross-platform Java L&F (also called "Metal")
-            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-        }
-        catch (Exception e) {}		
 		MainGame g = new MainGame();
 	}
 

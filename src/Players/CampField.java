@@ -1,9 +1,9 @@
+
 package Players;
 
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
@@ -123,11 +123,11 @@ public class CampField extends JPanel{
 		
 		i=0;
 		while(i != home.wallBreakersP.size()) { //for each wall breaker
-			if(camp.wallBreakersP.get(i).getEnemyCamp() == enemyNo) {
+			if(home.wallBreakersP.get(i).getEnemyCamp() == enemyNo) {
 				if(t == null) t = home.wallBreakersP.get(0);
 				else {
 					if(getDistance(t, d) > getDistance(home.wallBreakersP.get(i), d))
-						t = home.giantsP.get(i);
+						t = home.wallBreakersP.get(i);
 				}
 			}
 			i++;
@@ -206,3 +206,4 @@ public class CampField extends JPanel{
 		t.setFocus(d); //troop sets focus on closest building
 	}
 }
+

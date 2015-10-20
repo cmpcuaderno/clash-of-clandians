@@ -24,15 +24,15 @@ import javax.swing.ImageIcon;
  *  	- Number of players
  */
 
-public class StartPage extends JPanel implements ActionListener{
-	JButton start, howToPlay, exit, less, more;
-	JTextField noOfPlayers; //accepts integers from 2 to 6
-	JLabel numberOfPlayers, bg; //text
+public class StartPage extends JPanel{
+	JButton start, howToPlay, exit;
+	JTextField inputIP; //accepts integers from 2 to 6
+	JLabel ipAddress, bg; //text
 	Icon howIcon = new ImageIcon("../Assets/HowToPlay.png");
 	Icon startIcon = new ImageIcon("../Assets/start.png"); 
 	Icon quitIcon = new ImageIcon("../Assets/quit.png"); 
 	Icon background = new ImageIcon("../Assets/cover.png"); 
-	JPanel numPlayers = new JPanel();
+	JPanel getIP = new JPanel();
 	JPanel bgPanel = new JPanel();
 	JPanel buttonsPanel = new JPanel();
 	JPanel mainPanel = new JPanel();
@@ -51,51 +51,39 @@ public class StartPage extends JPanel implements ActionListener{
 		mainPanel.setPreferredSize(new Dimension(640,480));
 		mainPanel.setBackground(Color.BLUE);
 
-		//numPlayers.setPreferredSize(new Dimension(250,50));
 		
 		//noOfPlayers text field
-		noOfPlayers = new JTextField();
-		noOfPlayers.setEditable(false);
-		noOfPlayers.setText("2"); //minimum number of players
+		inputIP = new JTextField();
+		inputIP.setEditable(true);
+		inputIP.setText("127.0.0.0"); //minimum number of players
 		
 		//buttons
 		start = new JButton();
 		start.setPreferredSize(new Dimension(210,40));
-		start.addActionListener(this);
 		start.setIcon(startIcon);
 		start.setMaximumSize(start.getSize());
-		//start.setContentAreaFilled(false);
-		//start.setBorderPainted(false);
 		start.setBackground(Color.BLACK);
 		howToPlay = new JButton();
 		howToPlay.setIcon(howIcon);
-		howToPlay.addActionListener(this);
 		howToPlay.setContentAreaFilled(false);
 		howToPlay.setBorderPainted(false);
 		//howToPlay.setPreferredSize(new Dimension(210,40));
 		
 		exit = new JButton();
-		exit.addActionListener(this);
 		exit.setIcon(quitIcon);
 		exit.setContentAreaFilled(false);
 		exit.setBorderPainted(false);
 		//exit.setPreferredSize(new Dimension(210,40));
 		
-		less = new JButton("-");
-		less.addActionListener(this);
 		
-		more = new JButton("+");
-		more.addActionListener(this);
 		
 		//label
-		numberOfPlayers = new JLabel("Number of Players: ");
+		ipAddress = new JLabel("Server's IP Address: ");
 		
-		numPlayers.add(numberOfPlayers);
-		numPlayers.add(noOfPlayers);
-		numPlayers.add(more);
-		numPlayers.add(less);
+		getIP.add(ipAddress);
+		getIP.add(inputIP);
 		
-		buttonsPanel.add(numPlayers);
+		buttonsPanel.add(getIP);
 		buttonsPanel.add(start);
 		buttonsPanel.add(howToPlay);
 		buttonsPanel.add(exit);
@@ -112,29 +100,7 @@ public class StartPage extends JPanel implements ActionListener{
 		return players;
 	}
 	
-	private int decreasePlayers(){
-		players--;
-		return players;
-	}
 	
-	private int increasePlayers(){
-		players++;
-		return players;
-	}
 	
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == less){ //decreases number of players
-			players = Integer.parseInt(noOfPlayers.getText());
-			if(players > 2) //minimum number is 2
-				noOfPlayers.setText(Integer.toString(decreasePlayers()));
-			repaint();
-		}
-		
-		if(e.getSource() == more){ //increases number of players
-			players = Integer.parseInt(noOfPlayers.getText());
-			if(players < 6) //minimum number is 2
-				noOfPlayers.setText(Integer.toString(increasePlayers()));
-			repaint();
-		}
-	}
+	
 }

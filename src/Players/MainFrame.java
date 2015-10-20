@@ -1,20 +1,15 @@
+
 package Players;
 
 import java.awt.Dimension;
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-
 
 public class MainFrame extends JFrame implements ActionListener{
-	private JLayeredPane lpane = new JLayeredPane();
 	JPanel mainPanel;
 	StartPage Start;
 	HowToPlayPage HowToPlay;
@@ -23,7 +18,8 @@ public class MainFrame extends JFrame implements ActionListener{
 	HomeCamp Home;
 	EnemyCamp Enemy1;
 	Camp enemyCamp; //dummy data
-	int numberOfPlayers, campNo;
+	int campNo, numberOfPlayers = 4;
+	String ipAd;
 	boolean startGame;
 	
 	public MainFrame() {
@@ -33,10 +29,8 @@ public class MainFrame extends JFrame implements ActionListener{
 	}
 	
 	void GUI() {
-		setPreferredSize(new Dimension(640,480));
-		setLayout(new BorderLayout());
+		setPreferredSize(new Dimension(640,500));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
 		mainPanel = new JPanel();
 		
 		//frames
@@ -54,12 +48,11 @@ public class MainFrame extends JFrame implements ActionListener{
 		ChooseCamp.camp2.addActionListener(this);
 		ChooseCamp.camp3.addActionListener(this);
 		ChooseCamp.back.addActionListener(this);
-		
+
 		mainPanel.add(Start);
 		add(mainPanel);
 		pack();
 		setVisible(true);
-		setResizable(false);
 	}
 	
 	HomeCamp createCamp(int campNo){
@@ -136,7 +129,8 @@ public class MainFrame extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		//START PAGE
 		if(e.getSource() == Start.start) { // Start button
-			numberOfPlayers = Start.getNumberOfPlayers();
+			ipAd = Start.inputIP.getText();
+			System.out.println(ipAd);
 			mainPanel.remove(Start);
 			mainPanel.add(ChooseCamp);
 			repaint();
@@ -213,3 +207,4 @@ public class MainFrame extends JFrame implements ActionListener{
 		}
 	}
 }
+

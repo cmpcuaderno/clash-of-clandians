@@ -1,9 +1,10 @@
+
 package Players;
 
 import java.util.ArrayList;
 
 public class Camp {
-	private int trophies = 0; //number of trophies/enemy camps defeated
+	private int trophy = 0;
 	//array list of queued defense buildings/troops
 	ArrayList<Barbarian> barbarians;
 	ArrayList<Archer> archers;
@@ -34,11 +35,11 @@ public class Camp {
 	
 	TownHall townHall;
 	
-	void acquireTrophy() {
-		trophies++;
+	void getTrophy() {
+		trophy++;
 	}
 	
-	int getTrophy() {
-		return trophies;
+	int getTrophyCount() {
+		return trophy;
 	}
 }
