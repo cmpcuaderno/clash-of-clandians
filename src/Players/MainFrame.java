@@ -4,14 +4,19 @@ package Players;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.GridLayout;
+
 import java.util.Random;
+import javax.swing.ImageIcon;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JLabel;
 
 public class MainFrame extends JFrame implements ActionListener{
 	JPanel mainPanel;
 	StartPage Start;
+	Buttons ButtonsStart;
 	HowToPlayPage HowToPlay;
 	ChooseCampPage ChooseCamp;
 	MapWaitingPage Map;
@@ -32,22 +37,29 @@ public class MainFrame extends JFrame implements ActionListener{
 		setPreferredSize(new Dimension(640,500));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainPanel = new JPanel();
-		
-		//frames
-		Start = new StartPage();
+		//panels
+		Start = new StartPage(new ImageIcon("../Assets/cover.png").getImage());
+		ButtonsStart = new Buttons();
 		HowToPlay = new HowToPlayPage();
 		ChooseCamp = new ChooseCampPage();
 		Map = new MapWaitingPage();
 		
 		//button listeners
-		Start.start.addActionListener(this);
-		Start.howToPlay.addActionListener(this);
-		Start.exit.addActionListener(this);
+		ButtonsStart.start.addActionListener(this);
+		ButtonsStart.howToPlay.addActionListener(this);
+		ButtonsStart.exit.addActionListener(this);
 		HowToPlay.back.addActionListener(this);
 		ChooseCamp.camp1.addActionListener(this);
 		ChooseCamp.camp2.addActionListener(this);
 		ChooseCamp.camp3.addActionListener(this);
 		ChooseCamp.back.addActionListener(this);
+
+		Start.setLayout(new GridLayout(2,2));
+		Start.add(new JLabel(" "));
+		Start.add(new JLabel(" "));
+		Start.add(new JLabel(" "));
+		Start.add(ButtonsStart);
+
 
 		mainPanel.add(Start);
 		add(mainPanel);
@@ -128,8 +140,8 @@ public class MainFrame extends JFrame implements ActionListener{
 
 	public void actionPerformed(ActionEvent e) {
 		//START PAGE
-		if(e.getSource() == Start.start) { // Start button
-			ipAd = Start.inputIP.getText();
+		if(e.getSource() == ButtonsStart.start) { // Start button
+			ipAd = ButtonsStart.inputIP.getText();
 			System.out.println(ipAd);
 			mainPanel.remove(Start);
 			mainPanel.add(ChooseCamp);
@@ -137,14 +149,14 @@ public class MainFrame extends JFrame implements ActionListener{
 			revalidate();
 		}
 		
-		else if(e.getSource() == Start.howToPlay) { // How to Play button
+		else if(e.getSource() == ButtonsStart.howToPlay) { // How to Play button
 			mainPanel.remove(Start);
 			mainPanel.add(HowToPlay);
 			repaint();
 			revalidate();
 		}
 
-		else if(e.getSource() == Start.exit) { //Exit button
+		else if(e.getSource() == ButtonsStart.exit) { //Exit button
 			System.exit(0);
 		}
 		

@@ -2,9 +2,10 @@ package Players;
 
 import java.awt.Dimension;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.GridLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -25,76 +26,32 @@ import javax.swing.ImageIcon;
  */
 
 public class StartPage extends JPanel{
-	JButton start, howToPlay, exit;
-	JTextField inputIP; //accepts integers from 2 to 6
-	JLabel ipAddress, bg; //text
-	Icon howIcon = new ImageIcon("../Assets/HowToPlay.png");
-	Icon startIcon = new ImageIcon("../Assets/start.png"); 
-	Icon quitIcon = new ImageIcon("../Assets/quit.png"); 
-	Icon background = new ImageIcon("../Assets/cover.png"); 
-	JPanel getIP = new JPanel();
+	
+	
 	JPanel bgPanel = new JPanel();
 	JPanel buttonsPanel = new JPanel();
 	JPanel mainPanel = new JPanel();
 	private int players = 2;
+	private Image img;
+
+	public StartPage(String img) {
+    this(new ImageIcon(img).getImage());
+  }
 	
-	public StartPage() {
-		bg = new JLabel();
-		bg.setIcon(background);
-		bgPanel.add(bg);
-		
-		buttonsPanel.setLayout(new GridLayout(4,1));
-		mainPanel.setLayout(new GridLayout(2,2));
-		buttonsPanel.setPreferredSize(new Dimension(210,200));
-		buttonsPanel.setMaximumSize(buttonsPanel.getSize());
-		buttonsPanel.setBackground(Color.BLACK);
-		mainPanel.setPreferredSize(new Dimension(640,480));
-		mainPanel.setBackground(Color.BLUE);
-
-		
-		//noOfPlayers text field
-		inputIP = new JTextField();
-		inputIP.setEditable(true);
-		inputIP.setText("127.0.0.0"); //minimum number of players
-		
-		//buttons
-		start = new JButton();
-		start.setPreferredSize(new Dimension(210,40));
-		start.setIcon(startIcon);
-		start.setMaximumSize(start.getSize());
-		start.setBackground(Color.BLACK);
-		howToPlay = new JButton();
-		howToPlay.setIcon(howIcon);
-		howToPlay.setContentAreaFilled(false);
-		howToPlay.setBorderPainted(false);
-		//howToPlay.setPreferredSize(new Dimension(210,40));
-		
-		exit = new JButton();
-		exit.setIcon(quitIcon);
-		exit.setContentAreaFilled(false);
-		exit.setBorderPainted(false);
-		//exit.setPreferredSize(new Dimension(210,40));
-		
-		
-		
-		//label
-		ipAddress = new JLabel("Server's IP Address: ");
-		
-		getIP.add(ipAddress);
-		getIP.add(inputIP);
-		
-		buttonsPanel.add(getIP);
-		buttonsPanel.add(start);
-		buttonsPanel.add(howToPlay);
-		buttonsPanel.add(exit);
-		
-		mainPanel.add(new JLabel(""));
-		mainPanel.add(new JLabel(""));
-		mainPanel.add(new JLabel(""));
-		mainPanel.add(buttonsPanel);
-
-		add(mainPanel);
+	public StartPage(Image img) {
+		this.img = img;
+    Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+    setPreferredSize(size);
+    setMinimumSize(size);
+    setMaximumSize(size);
+    setSize(size);
+    setLayout(null);
 	}
+
+	public void paintComponent(Graphics g) {
+    g.drawImage(img, 0, 0, null);
+  }
+
 
 	int getNumberOfPlayers(){
 		return players;
