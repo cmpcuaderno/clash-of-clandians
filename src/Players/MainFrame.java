@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.GridLayout;
+import java.awt.BorderLayout;
 
 import java.util.Random;
 import javax.swing.ImageIcon;
@@ -17,6 +18,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	JPanel mainPanel;
 	Background Start;
 	Background Grass;
+	Background Back;
 	Buttons ButtonsStart;
 	HowToPlayPage HowToPlay;
 	ChooseCampPage ChooseCamp;
@@ -27,6 +29,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	int campNo, numberOfPlayers = 4;
 	String ipAd;
 	boolean startGame;
+	JPanel dummy;
 	
 	public MainFrame() {
 		setTitle("Clash of Clandians");
@@ -41,6 +44,11 @@ public class MainFrame extends JFrame implements ActionListener{
 		//panels
 		Start = new Background(new ImageIcon("../Assets/cover.png").getImage());
 		Grass = new Background(new ImageIcon("../Assets/grass.png").getImage());
+		Back = new Background(new ImageIcon("../Assets/camp_background.jpg").getImage());
+		dummy = new JPanel();
+		dummy.setPreferredSize(new Dimension(250, 200));
+		dummy.setOpaque(false);
+
 		ButtonsStart = new Buttons();
 		HowToPlay = new HowToPlayPage();
 		ChooseCamp = new ChooseCampPage();
@@ -146,8 +154,19 @@ public class MainFrame extends JFrame implements ActionListener{
 		if(e.getSource() == ButtonsStart.start) { // Start button
 			ipAd = ButtonsStart.inputIP.getText();
 			System.out.println(ipAd);
+			Back.setLayout(new BorderLayout());
+			ChooseCamp.setOpaque(false);
+
+			Back.add(dummy, BorderLayout.NORTH);
+			Back.add(new JLabel(" FRfdgfdggdgdfdfgdgfgdfdfgdfdfgdfgdfgdfgdD"), BorderLayout.SOUTH);
+
+	     Back.add(new JLabel("East"), BorderLayout.EAST);
+	     Back.add(new JLabel("West"), BorderLayout.WEST);
+	     Back.add(ChooseCamp, BorderLayout.CENTER);
+   
 			mainPanel.remove(Start);
-			mainPanel.add(ChooseCamp);
+			mainPanel.add(Back);
+			//mainPanel.add(Back);
 			repaint();
 			revalidate();
 		}
