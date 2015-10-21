@@ -1,7 +1,14 @@
 package Players;
 
-import java.awt.*;
-import javax.swing.*;
+import java.awt.Dimension;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+
 
 public class Buttons extends JPanel{
 	JButton start, howToPlay, exit;

@@ -15,7 +15,8 @@ import javax.swing.JLabel;
 
 public class MainFrame extends JFrame implements ActionListener{
 	JPanel mainPanel;
-	StartPage Start;
+	Background Start;
+	Background Grass;
 	Buttons ButtonsStart;
 	HowToPlayPage HowToPlay;
 	ChooseCampPage ChooseCamp;
@@ -38,7 +39,8 @@ public class MainFrame extends JFrame implements ActionListener{
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainPanel = new JPanel();
 		//panels
-		Start = new StartPage(new ImageIcon("../Assets/cover.png").getImage());
+		Start = new Background(new ImageIcon("../Assets/cover.png").getImage());
+		Grass = new Background(new ImageIcon("../Assets/grass.png").getImage());
 		ButtonsStart = new Buttons();
 		HowToPlay = new HowToPlayPage();
 		ChooseCamp = new ChooseCampPage();
@@ -65,6 +67,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		add(mainPanel);
 		pack();
 		setVisible(true);
+		setResizable(false);
 	}
 	
 	HomeCamp createCamp(int campNo){

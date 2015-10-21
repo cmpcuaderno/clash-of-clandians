@@ -25,7 +25,7 @@ import javax.swing.ImageIcon;
  *  	- Number of players
  */
 
-public class StartPage extends JPanel{
+public class Background extends JPanel{
 	
 	
 	JPanel bgPanel = new JPanel();
@@ -34,11 +34,11 @@ public class StartPage extends JPanel{
 	private int players = 2;
 	private Image img;
 
-	public StartPage(String img) {
+	public Background(String img) {
     this(new ImageIcon(img).getImage());
   }
 	
-	public StartPage(Image img) {
+	public Background(Image img) {
 		this.img = img;
     Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
     setPreferredSize(size);
@@ -52,10 +52,6 @@ public class StartPage extends JPanel{
     g.drawImage(img, 0, 0, null);
   }
 
-
-	int getNumberOfPlayers(){
-		return players;
-	}
 	
 	
 	
