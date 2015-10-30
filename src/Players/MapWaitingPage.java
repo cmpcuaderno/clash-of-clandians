@@ -7,7 +7,6 @@ import javax.swing.JPanel;
 
 public class MapWaitingPage extends JPanel{
 	JLabel[] p;
-	
 	public MapWaitingPage(){
 		setLayout(new GridLayout(2,3));
 		
@@ -16,6 +15,7 @@ public class MapWaitingPage extends JPanel{
 		for(int i=0; i<6; i++) { //initializing each player grid
 			p[i] = new JLabel("Waiting for Player " + Integer.toString(i+1));
 		}
+		setOpaque(false);
 		
 	}
 	

@@ -18,7 +18,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	JPanel mainPanel;
 	Background Start;
 	Background Grass;
-	Background Back;
+	Background BackgroundChooseCamp;
 	Buttons ButtonsStart;
 	HowToPlayPage HowToPlay;
 	ChooseCampPage ChooseCamp;
@@ -44,9 +44,9 @@ public class MainFrame extends JFrame implements ActionListener{
 		//panels
 		Start = new Background(new ImageIcon("../Assets/cover.png").getImage());
 		Grass = new Background(new ImageIcon("../Assets/grass.png").getImage());
-		Back = new Background(new ImageIcon("../Assets/camp_background.jpg").getImage());
+		BackgroundChooseCamp = new Background(new ImageIcon("../Assets/camp_background.jpg").getImage());
 		dummy = new JPanel();
-		dummy.setPreferredSize(new Dimension(250, 200));
+		dummy.setPreferredSize(new Dimension(250, 20));
 		dummy.setOpaque(false);
 
 		ButtonsStart = new Buttons();
@@ -154,19 +154,17 @@ public class MainFrame extends JFrame implements ActionListener{
 		if(e.getSource() == ButtonsStart.start) { // Start button
 			ipAd = ButtonsStart.inputIP.getText();
 			System.out.println(ipAd);
-			Back.setLayout(new BorderLayout());
+			BackgroundChooseCamp.setLayout(new BorderLayout());
 			ChooseCamp.setOpaque(false);
 
-			Back.add(dummy, BorderLayout.NORTH);
-			Back.add(new JLabel(" FRfdgfdggdgdfdfgdgfgdfdfgdfdfgdfgdfgdfgdD"), BorderLayout.SOUTH);
-
-	     Back.add(new JLabel("East"), BorderLayout.EAST);
-	     Back.add(new JLabel("West"), BorderLayout.WEST);
-	     Back.add(ChooseCamp, BorderLayout.CENTER);
-   
+			BackgroundChooseCamp.add(dummy, BorderLayout.NORTH);
+			BackgroundChooseCamp.add(ChooseCamp.back, BorderLayout.SOUTH);
+		    BackgroundChooseCamp.add(new JLabel(" "), BorderLayout.EAST);
+		    BackgroundChooseCamp.add(new JLabel(" "), BorderLayout.WEST);
+		    BackgroundChooseCamp.add(ChooseCamp, BorderLayout.CENTER);
+	   
 			mainPanel.remove(Start);
-			mainPanel.add(Back);
-			//mainPanel.add(Back);
+			mainPanel.add(BackgroundChooseCamp);
 			repaint();
 			revalidate();
 		}
@@ -193,7 +191,7 @@ public class MainFrame extends JFrame implements ActionListener{
 		
 		// CHOOSE CAMP PAGE
 		else if(e.getSource() == ChooseCamp.back) { // back button for choose camp
-			mainPanel.remove(ChooseCamp);
+			mainPanel.remove(BackgroundChooseCamp);
 			mainPanel.add(Start);
 			repaint();
 			revalidate();
