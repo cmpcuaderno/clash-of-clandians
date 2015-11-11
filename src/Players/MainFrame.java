@@ -1,18 +1,21 @@
 
 package Players;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.GridLayout;
-import java.awt.BorderLayout;
-
 import java.util.Random;
-import javax.swing.ImageIcon;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
+
+import Chat.ChatBox;
+import Chat.Client;
 
 public class MainFrame extends JFrame implements ActionListener{
 	JPanel mainPanel;
@@ -31,51 +34,59 @@ public class MainFrame extends JFrame implements ActionListener{
 	boolean startGame;
 	JPanel dummy;
 	
-	public MainFrame() {
-		setTitle("Clash of Clandians");
-		GUI();
+	ChatBox chat_box;
+	
+	public MainFrame(Client client) {
+		GUI(client);
 		startGame = false;
 	}
 	
-	void GUI() {
-		setPreferredSize(new Dimension(640,500));
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		mainPanel = new JPanel();
-		//panels
-		Start = new Background(new ImageIcon("../Assets/cover.png").getImage());
-		Grass = new Background(new ImageIcon("../Assets/grass.png").getImage());
-		BackgroundChooseCamp = new Background(new ImageIcon("../Assets/camp_background.jpg").getImage());
-		dummy = new JPanel();
-		dummy.setPreferredSize(new Dimension(250, 20));
-		dummy.setOpaque(false);
-
-		ButtonsStart = new Buttons();
-		HowToPlay = new HowToPlayPage();
-		ChooseCamp = new ChooseCampPage();
-		Map = new MapWaitingPage();
+	void GUI(Client client) {
 		
-		//button listeners
-		ButtonsStart.start.addActionListener(this);
-		ButtonsStart.howToPlay.addActionListener(this);
-		ButtonsStart.exit.addActionListener(this);
-		HowToPlay.back.addActionListener(this);
-		ChooseCamp.camp1.addActionListener(this);
-		ChooseCamp.camp2.addActionListener(this);
-		ChooseCamp.camp3.addActionListener(this);
-		ChooseCamp.back.addActionListener(this);
+		mainPanel = new JPanel(new BorderLayout(10, 10));
+	
+		//panels
+//		Start = new Background(new ImageIcon("../Assets/cover.png").getImage());
+//		Grass = new Background(new ImageIcon("../Assets/grass.png").getImage());
+//		BackgroundChooseCamp = new Background(new ImageIcon("../Assets/camp_background.jpg").getImage());
+//		dummy = new JPanel();
+//		dummy.setPreferredSize(new Dimension(250, 20));
+//		dummy.setOpaque(false);
+//
+//		ButtonsStart = new Buttons();
+//		HowToPlay = new HowToPlayPage();
+//		ChooseCamp = new ChooseCampPage();
+//		Map = new MapWaitingPage();
+//		
+//		//button listeners
+//		ButtonsStart.start.addActionListener(this);
+//		ButtonsStart.howToPlay.addActionListener(this);
+//		ButtonsStart.exit.addActionListener(this);
+//		HowToPlay.back.addActionListener(this);
+//		ChooseCamp.camp1.addActionListener(this);
+//		ChooseCamp.camp2.addActionListener(this);
+//		ChooseCamp.camp3.addActionListener(this);
+//		ChooseCamp.back.addActionListener(this);
+//
+//		Start.setLayout(new GridLayout(2,2));
+//		Start.add(new JLabel(" "));
+//		Start.add(new JLabel(" "));
+//		Start.add(new JLabel(" "));
+//		Start.add(ButtonsStart);
 
-		Start.setLayout(new GridLayout(2,2));
-		Start.add(new JLabel(" "));
-		Start.add(new JLabel(" "));
-		Start.add(new JLabel(" "));
-		Start.add(ButtonsStart);
-
-
-		mainPanel.add(Start);
-		add(mainPanel);
-		pack();
-		setVisible(true);
-		setResizable(false);
+//		mainPanel.add(Start);
+		
+		chat_box = new ChatBox(client);
+		mainPanel.add(chat_box, BorderLayout.WEST);
+				
+		this.add(mainPanel);
+		this.pack();
+		this.setTitle("Clash of Clandian");
+		this.setLocationRelativeTo(null);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setResizable(false);
+		this.setVisible(true);
+		
 	}
 	
 	HomeCamp createCamp(int campNo){

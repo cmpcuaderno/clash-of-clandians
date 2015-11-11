@@ -1,12 +1,13 @@
 package Players;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
-import javax.swing.JPanel;
 import javax.swing.Timer;
+
+import Chat.ChatBox;
+import Chat.Client;
 
 
 public class MainGame implements ActionListener{
@@ -16,25 +17,29 @@ public class MainGame implements ActionListener{
 	Timer timer;
 	MainFrame game;
 	
-	public MainGame() {
-		JPanel topPanel = new JPanel(new BorderLayout());
-		timer = new Timer(1000, this); //one second
-		time = new JLabel("15:00");
-		game = new MainFrame();
-		while(!game.startGame) {System.out.print("");} // waiting for other players
-		game.add(topPanel, BorderLayout.NORTH);
-		game.Home = game.createCamp(game.campNo);
-		game.dummyData();
-		game.goToHomeCamp();
-		trophyCount = new JLabel("Trophy Count: " + game.Home.camp.getTrophyCount() + "\t\t\t\t\t");
-		topPanel.add(trophyCount, BorderLayout.EAST);
-		topPanel.add(time, BorderLayout.WEST);
-		timer.start();
+	
+	public MainGame(Client client) {
+//		JPanel topPanel = new JPanel(new BorderLayout());
+//		timer = new Timer(1000, this); //one second
+//		time = new JLabel("15:00");
+//		game = new MainFrame();
+//		while(!game.startGame) {System.out.print("");} // waiting for other players
+//		game.add(topPanel, BorderLayout.NORTH);
+//		game.Home = game.createCamp(game.campNo);
+//		game.dummyData();
+//		game.goToHomeCamp();
+//		trophyCount = new JLabel("Trophy Count: " + game.Home.camp.getTrophyCount() + "\t\t\t\t\t");
+//		topPanel.add(trophyCount, BorderLayout.EAST);
+//		topPanel.add(time, BorderLayout.WEST);
+//		timer.start();
+		
+		game = new MainFrame(client);
 	}
 	
-	public static void main(String[] args){
-		MainGame g = new MainGame();
+	public ChatBox getChatBox() {
+		return game.chat_box;
 	}
+	
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
