@@ -15,7 +15,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import Chat.ChatBox;
-import Chat.Client;
+import Client.Client;
 
 public class MainFrame extends JFrame implements ActionListener{
 	JPanel mainPanel;
@@ -32,7 +32,9 @@ public class MainFrame extends JFrame implements ActionListener{
 	int campNo, numberOfPlayers = 4;
 	String ipAd;
 	boolean startGame;
-	JPanel dummy;
+	JPanel dummy, sample;
+	
+	
 	
 	ChatBox chat_box;
 	
@@ -42,49 +44,58 @@ public class MainFrame extends JFrame implements ActionListener{
 	}
 	
 	void GUI(Client client) {
-		
-		mainPanel = new JPanel(new BorderLayout(10, 10));
-	
-		//panels
-//		Start = new Background(new ImageIcon("../Assets/cover.png").getImage());
-//		Grass = new Background(new ImageIcon("../Assets/grass.png").getImage());
-//		BackgroundChooseCamp = new Background(new ImageIcon("../Assets/camp_background.jpg").getImage());
+		mainPanel = new JPanel(new BorderLayout());
+		this.setPreferredSize(new Dimension(1000, 500));
+//		//panels
+		Start = new Background(new ImageIcon("Assets/cover.png").getImage());
+		Grass = new Background(new ImageIcon("../Assets/grass.png").getImage());
+		BackgroundChooseCamp = new Background(new ImageIcon("../Assets/camp_background.jpg").getImage());
+//		
 //		dummy = new JPanel();
 //		dummy.setPreferredSize(new Dimension(250, 20));
 //		dummy.setOpaque(false);
 //
-//		ButtonsStart = new Buttons();
-//		HowToPlay = new HowToPlayPage();
-//		ChooseCamp = new ChooseCampPage();
+		ButtonsStart = new Buttons();
+		HowToPlay = new HowToPlayPage();
+		ChooseCamp = new ChooseCampPage();
 //		Map = new MapWaitingPage();
 //		
 //		//button listeners
-//		ButtonsStart.start.addActionListener(this);
-//		ButtonsStart.howToPlay.addActionListener(this);
-//		ButtonsStart.exit.addActionListener(this);
-//		HowToPlay.back.addActionListener(this);
-//		ChooseCamp.camp1.addActionListener(this);
-//		ChooseCamp.camp2.addActionListener(this);
-//		ChooseCamp.camp3.addActionListener(this);
-//		ChooseCamp.back.addActionListener(this);
-//
-//		Start.setLayout(new GridLayout(2,2));
-//		Start.add(new JLabel(" "));
-//		Start.add(new JLabel(" "));
-//		Start.add(new JLabel(" "));
-//		Start.add(ButtonsStart);
+		ButtonsStart.start.addActionListener(this);
+		ButtonsStart.howToPlay.addActionListener(this);
+		ButtonsStart.exit.addActionListener(this);
+		HowToPlay.back.addActionListener(this);
+		ChooseCamp.camp1.addActionListener(this);
+		ChooseCamp.camp2.addActionListener(this);
+		ChooseCamp.camp3.addActionListener(this);
+		ChooseCamp.back.addActionListener(this);
 
-//		mainPanel.add(Start);
+		Start.setLayout(new GridLayout(2,2));
+		Start.add(new JLabel(" "));
+		Start.add(new JLabel(" "));
+		Start.add(new JLabel(" "));
+		Start.add(ButtonsStart);
+//
+//		mainPanel.add(Start, BorderLayout.CENTER);
+		
+		sample = new JPanel(new BorderLayout(10, 10));
+		Start.setPreferredSize(new Dimension(720, 480));
+		Start.setOpaque(false);
+		sample.setBackground(Color.GREEN);
+		
+		mainPanel.add(Start, BorderLayout.CENTER);
 		
 		chat_box = new ChatBox(client);
+		chat_box.setOpaque(false);
 		mainPanel.add(chat_box, BorderLayout.WEST);
+		
 				
 		this.add(mainPanel);
 		this.pack();
 		this.setTitle("Clash of Clandian");
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(false);
+		this.setResizable(true);
 		this.setVisible(true);
 		
 	}

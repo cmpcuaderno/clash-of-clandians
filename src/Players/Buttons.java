@@ -12,9 +12,9 @@ import javax.swing.JButton;
 
 public class Buttons extends JPanel{
 	JButton start, howToPlay, exit;
-	Icon howIcon = new ImageIcon("../Assets/HowToPlay.png");
-	Icon startIcon = new ImageIcon("../Assets/start.png"); 
-	Icon quitIcon = new ImageIcon("../Assets/quit.png"); 
+	Icon howIcon = new ImageIcon("Assets/HowToPlay.png");
+	Icon startIcon = new ImageIcon("Assets/start.png"); 
+	Icon quitIcon = new ImageIcon("Assets/quit.png"); 
 	JTextField inputIP; 
 	JLabel ipAddress, bg; 
 	JPanel getIP = new JPanel();
@@ -40,17 +40,17 @@ public class Buttons extends JPanel{
 		exit.setContentAreaFilled(false);
 		exit.setBorderPainted(false);
 
-		inputIP = new JTextField();
-		inputIP.setEditable(true);
-		inputIP.setText("127.0.0.0"); 
-		
-
-		ipAddress = new JLabel("Server's IP Address: ");
-		
-		getIP.add(ipAddress);
-		getIP.add(inputIP);
-		getIP.setOpaque(false);
-		add(getIP);
+//		inputIP = new JTextField();
+//		inputIP.setEditable(true);
+//		inputIP.setText("127.0.0.0"); 
+//		
+//
+//		ipAddress = new JLabel("Server's IP Address: ");
+//		
+//		getIP.add(ipAddress);
+//		getIP.add(inputIP);
+//		getIP.setOpaque(false);
+//		add(getIP);
 		add(start);
 		add(howToPlay);
 		add(exit);

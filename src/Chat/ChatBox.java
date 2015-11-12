@@ -16,13 +16,14 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.text.DefaultCaret;
 
-public class ChatBox extends JPanel implements ActionListener, KeyListener {
+import Client.*;
 
-	private Client client;
+public class ChatBox extends JPanel implements ActionListener, KeyListener {
 	private JPanel main_chat_panel, chat_area_panel, message_area_panel;
 	public JTextField chat_area;
 	public JTextArea message_area;
 	private JButton send_button;
+	private Client client;
 	
 	public ChatBox() { 
 		this.setUpGUI();

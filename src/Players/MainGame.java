@@ -1,14 +1,15 @@
 package Players;
 
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.Timer;
 
 import Chat.ChatBox;
-import Chat.Client;
-
+import Client.*;
 
 public class MainGame implements ActionListener{
 	JLabel time; //display of timer
@@ -33,19 +34,38 @@ public class MainGame implements ActionListener{
 //		topPanel.add(time, BorderLayout.WEST);
 //		timer.start();
 		
+//		JPanel top_panel = new JPanel(new BorderLayout());
+//		timer = new Timer(1000, this);
+		
 		game = new MainFrame(client);
+		
+//		while(!game.startGame) { System.out.println(""); }
+		
+//		game.add(top_panel);
+		
+//		game.Home = game.createCamp(game.campNo);
+		
+//		game.dummyData();
+		
+//		game.goToHomeCamp();
+		
+//		trophyCount = new JLabel("Trophy Count: " + game.Home.camp.getTrophyCount() + "\t\t\t\t\t");
+//		
+//		top_panel.add(trophyCount, BorderLayout.EAST);
+//		top_panel.add();
+		
 	}
 	
+
 	public ChatBox getChatBox() {
 		return game.chat_box;
 	}
 	
-
-	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		trophyCount.setText("Trophy Count: " + game.Home.camp.getTrophyCount() + "\t\t\t\t\t");
 		remainingTime--; //decrease remaining time
 		time.setText(remainingTime/60 + ":" + remainingTime%60);
+		
 		if(remainingTime/60 < 10 && remainingTime%60 >= 10)
 			time.setText("0" + remainingTime/60 + ":" + remainingTime%60);
 		else if(remainingTime/60 < 10 && remainingTime%60 < 10)
