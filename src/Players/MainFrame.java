@@ -21,15 +21,16 @@ public class MainFrame extends JFrame implements ActionListener{
 	JPanel mainPanel;
 	Background Start;
 	Background Grass;
-	Background BackgroundChooseCamp;
+	Background BackgroundChooseCamp , WaitingPage;
 	Buttons ButtonsStart;
 	HowToPlayPage HowToPlay;
 	ChooseCampPage ChooseCamp;
+	MapAttackPage MapAttack;
 	MapWaitingPage Map;
 	HomeCamp Home;
 	EnemyCamp Enemy1;
 	Camp enemyCamp; //dummy data
-	int campNo, numberOfPlayers = 4;
+	int campNo, numberOfPlayers, connected = 0;
 	String ipAd;
 	boolean startGame;
 	JPanel dummy, sample;
@@ -38,19 +39,20 @@ public class MainFrame extends JFrame implements ActionListener{
 	
 	ChatBox chat_box;
 	
-	public MainFrame(Client client) {
+	public MainFrame(Client client, int noOfPlayers) {
+		this.numberOfPlayers = noOfPlayers;
 		GUI(client);
 		startGame = false;
 	}
 	
 	void GUI(Client client) {
 		mainPanel = new JPanel(new BorderLayout());
-		this.setPreferredSize(new Dimension(1000, 500));
+		this.setPreferredSize(new Dimension(890, 575));
 //		//panels
 		Start = new Background(new ImageIcon("Assets/cover.png").getImage());
-		Grass = new Background(new ImageIcon("../Assets/grass.png").getImage());
-		BackgroundChooseCamp = new Background(new ImageIcon("../Assets/camp_background.jpg").getImage());
-//		
+		Grass = new Background(new ImageIcon("Assets/grass.png").getImage());
+		BackgroundChooseCamp =  new Background(new ImageIcon("Assets/camp_background.jpg").getImage());
+		WaitingPage =  new Background(new ImageIcon("Assets/camp_background.jpg").getImage());
 //		dummy = new JPanel();
 //		dummy.setPreferredSize(new Dimension(250, 20));
 //		dummy.setOpaque(false);
@@ -58,7 +60,8 @@ public class MainFrame extends JFrame implements ActionListener{
 		ButtonsStart = new Buttons();
 		HowToPlay = new HowToPlayPage();
 		ChooseCamp = new ChooseCampPage();
-//		Map = new MapWaitingPage();
+		Map = new MapWaitingPage();
+		MapAttack = new MapAttackPage();
 //		
 //		//button listeners
 		ButtonsStart.start.addActionListener(this);
@@ -69,6 +72,10 @@ public class MainFrame extends JFrame implements ActionListener{
 		ChooseCamp.camp2.addActionListener(this);
 		ChooseCamp.camp3.addActionListener(this);
 		ChooseCamp.back.addActionListener(this);
+		for(int i=0; i<6; i++) {
+			//if(i != campNo)
+			MapAttack.p[i].addActionListener(this);
+		}
 
 		Start.setLayout(new GridLayout(2,2));
 		Start.add(new JLabel(" "));
@@ -95,22 +102,23 @@ public class MainFrame extends JFrame implements ActionListener{
 		this.setTitle("Clash of Clandian");
 		this.setLocationRelativeTo(null);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setVisible(true);
 		
 	}
 	
 	HomeCamp createCamp(int campNo){
 		HomeCamp h;
-		if(campNo == 1) h = new HomeCamp(new Camp1());
-		else if(campNo == 2) h = new HomeCamp(new Camp2());
-		else h = new HomeCamp(new Camp3());
+		if(campNo == 1) h = new HomeCamp(new Camp1(connected++));
+		else if(campNo == 2) h = new HomeCamp(new Camp2(connected++));
+		else h = new HomeCamp(new Camp3(connected++));
 		h.attack.addActionListener(this);
 		return h;
 	}
 
 	void goToHomeCamp(){
-		mainPanel.removeAll();
+		mainPanel.remove(Map);
+		mainPanel.remove(Enemy1);
 		mainPanel.add(Home);
 		repaint();
 		revalidate();
@@ -119,7 +127,7 @@ public class MainFrame extends JFrame implements ActionListener{
 	void dummyData() { //dummy enemy camp
 		Random rX = new Random(), rY = new Random();
 		int randomX = rX.nextInt(25), randomY = rY.nextInt(20);
-		enemyCamp = new Camp1();
+		enemyCamp = new Camp1(connected++);
 		Enemy1 = new EnemyCamp(enemyCamp, Home.camp, 1);
 		Enemy1.home.addActionListener(this);
 		
@@ -174,12 +182,12 @@ public class MainFrame extends JFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		//START PAGE
 		if(e.getSource() == ButtonsStart.start) { // Start button
-			ipAd = ButtonsStart.inputIP.getText();
-			System.out.println(ipAd);
+			//ipAd = ButtonsStart.inputIP.getText();
+			//System.out.println(ipAd);
 			BackgroundChooseCamp.setLayout(new BorderLayout());
 			ChooseCamp.setOpaque(false);
 
-			BackgroundChooseCamp.add(dummy, BorderLayout.NORTH);
+			//BackgroundChooseCamp.add(dummy, BorderLayout.NORTH);
 			BackgroundChooseCamp.add(ChooseCamp.back, BorderLayout.SOUTH);
 		    BackgroundChooseCamp.add(new JLabel(" "), BorderLayout.EAST);
 		    BackgroundChooseCamp.add(new JLabel(" "), BorderLayout.WEST);
@@ -220,44 +228,74 @@ public class MainFrame extends JFrame implements ActionListener{
 		}
 
 		else if(e.getSource() == ChooseCamp.camp1) { // choosing camp 1
-			campNo = 1; // predefined camp 1
-			mainPanel.remove(ChooseCamp);
+			//campNo = 1; // predefined camp 1
+			Home = createCamp(1);
 			Map.setMap(numberOfPlayers);
-			mainPanel.add(Map);
+			mainPanel.remove(BackgroundChooseCamp);
+			//WaitingPage.setLayout(new GridLayout(1, 1));
+			//WaitingPage.add(Map);
+			mainPanel.add(Map);			
 			repaint();
 			revalidate();
-			startGame = true; //server should change this
+			//startGame = true; //server should change this
 		}
 
 		else if(e.getSource() == ChooseCamp.camp2) { // choosing camp 2
 			campNo = 2; // predefined camp 2
-			mainPanel.remove(ChooseCamp);
+			Home = createCamp(2);
 			Map.setMap(numberOfPlayers);
-			mainPanel.add(Map);
+			mainPanel.remove(BackgroundChooseCamp);
+			//WaitingPage.setLayout(new GridLayout(1, 1));
+			//WaitingPage.add(Map);
+			mainPanel.add(Map);			
 			repaint();
 			revalidate();
-			startGame = true; //server should change this
+			//startGame = true; //server should change this
 		}
 
 		else if(e.getSource() == ChooseCamp.camp3) { // choosing camp 3
 			campNo = 3; // predefined camp 3
-			mainPanel.remove(ChooseCamp);
+			Home = createCamp(3);
 			Map.setMap(numberOfPlayers);
-			mainPanel.add(Map);
+			mainPanel.remove(BackgroundChooseCamp);
+			//WaitingPage.setLayout(new GridLayout(1, 1));
+			//WaitingPage.add(Map);
+			mainPanel.add(Map);			
 			repaint();
 			revalidate();
-			startGame = true; //server should change this
+			//startGame = true; //server should change this
 		}
 		
 		else if(e.getSource() == Home.attack) { // going to enemy camp
 			mainPanel.remove(Home);
-			mainPanel.add(Enemy1);
+			MapAttack.setMap(numberOfPlayers);
+			//WaitingPage.setLayout(new GridLayout(1, 1));
+			//WaitingPage.add(Map);
+			mainPanel.add(MapAttack);			
 			repaint();
 			revalidate();
+			//mainPanel.add(MapAttack);
+			//mainPanel.add(Enemy1);
+			
 		}
 		
 		else if(e.getSource() == Enemy1.home) { // going to enemy camp
 			goToHomeCamp();
+		}
+		
+		if(connected == numberOfPlayers) {
+			mainPanel.remove(Map);
+			startGame = true;
+		}
+		
+		//MAP ATTACK PAGE
+		for(int i=0; i<6; i++) {
+			if(e.getSource() == MapAttack.p[i]) {
+				mainPanel.remove(MapAttack);
+				mainPanel.add(Enemy1); //change this to camp of selected enemy
+				repaint();
+				revalidate();
+			}
 		}
 	}
 }

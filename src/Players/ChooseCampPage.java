@@ -7,9 +7,11 @@ import javax.swing.JPanel;
 
 public class ChooseCampPage extends JPanel{
 	JButton camp1, camp2, camp3, back;
-	Icon howIcon = new ImageIcon("../Assets/HowToPlay.png");
-	Icon backIcon = new ImageIcon("../Assets/back.png");
-	Icon camp1Back = new ImageIcon("../Assets/CAMP1.jpg");
+	Icon howIcon = new ImageIcon("Assets/HowToPlay.png");
+	Icon backIcon = new ImageIcon("Assets/back.png");
+	Icon camp1_icon = new ImageIcon("Assets/camp_1.jpg");
+	Icon camp2_icon = new ImageIcon("Assets/camp_2.jpg");
+	Icon camp3_icon = new ImageIcon("Assets/camp_3.jpg");
 	public ChooseCampPage(){
 
 		camp1 = new JButton();
@@ -18,9 +20,9 @@ public class ChooseCampPage extends JPanel{
 		back = new JButton();
 		setPreferredSize(new Dimension(600, 480));
 
-		camp1.setIcon(camp1Back);
-		camp2.setIcon(camp1Back);
-		camp3.setIcon(camp1Back);
+		camp1.setIcon(camp1_icon);
+		camp2.setIcon(camp2_icon);
+		camp3.setIcon(camp3_icon);
 		back.setIcon(backIcon);
 		
 		camp1.setMaximumSize(camp1.getSize());		//remove button borders

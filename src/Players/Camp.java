@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 public class Camp {
 	private int trophy = 0;
+	int playerNo;
 	//array list of queued defense buildings/troops
 	ArrayList<Barbarian> barbarians;
 	ArrayList<Archer> archers;

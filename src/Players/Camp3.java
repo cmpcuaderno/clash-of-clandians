@@ -3,7 +3,8 @@ package Players;
 import java.util.ArrayList;
 
 public class Camp3 extends Camp{
-	public Camp3(){
+	public Camp3(int playerNo){
+		this.playerNo = playerNo;
 		int i;
 		barbarians = new ArrayList<Barbarian>();
 		archers = new ArrayList<Archer>();

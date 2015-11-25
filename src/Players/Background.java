@@ -43,9 +43,7 @@ public class Background extends JPanel{
 	public Background(Image img) {
 		this.img = img;
     Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
-    System.out.println("hahahaha");
-    System.out.println("hahahaha");
-    System.out.println("hahahaha");
+    
     this.setPreferredSize(size);
     this.setMinimumSize(size);
     this.setMaximumSize(size);

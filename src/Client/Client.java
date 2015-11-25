@@ -19,6 +19,7 @@ public class Client {
 	private BufferedReader in;
 	public PrintWriter out;
 	private MainGame main_game;
+	String noOfPlayers;
 	
 	public Client() { }
 	
@@ -38,9 +39,19 @@ public class Client {
 	                JOptionPane.PLAIN_MESSAGE);
 	        
 		}
+		private String getNumOfPlayers() {
+	        return JOptionPane.showInputDialog(
+	                frame,
+	                "Number of Players:",
+	                "Clash of Clandian Chat",
+	                JOptionPane.PLAIN_MESSAGE);
+	        
+		}
+		
 		
 	    private void run() throws IOException, IOException  {
 	        socket = new Socket(getServerAddress(), 1234);
+	        
 	        in = new BufferedReader(new InputStreamReader(
 	            socket.getInputStream()));
 	        out = new PrintWriter(socket.getOutputStream(), true);
@@ -52,11 +63,14 @@ public class Client {
 	            } 
 	            
 	            else if (line.startsWith("NAMEACCEPTED")) {
-	            	main_game = new MainGame(this);
+	            	main_game = new MainGame(this, Integer.parseInt(noOfPlayers));
 	            } 
 	            
 	            else if (line.startsWith("MESSAGE")) {
 	                main_game.getChatBox().message_area.append(line.substring(8) + "\n");
+	            }
+	            else if(line.startsWith("NUMBEROFPLAYERS")) {
+	            	out.println(noOfPlayers = getNumOfPlayers());
 	            }
 	        }
 	    }

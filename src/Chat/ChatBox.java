@@ -36,13 +36,15 @@ public class ChatBox extends JPanel implements ActionListener, KeyListener {
 	
 	public void setUpGUI() {
 		main_chat_panel = new JPanel(new BorderLayout());
-		main_chat_panel.setPreferredSize(new Dimension(250, 450));
+		main_chat_panel.setPreferredSize(new Dimension(250, 530));
 				
 		message_area_panel = new JPanel(new BorderLayout());
 		message_area_panel.setBorder(new EmptyBorder(5, 5, 0, 0));
 		
 		message_area = new JTextArea();
 		message_area.setEditable(false);
+		message_area.setLineWrap(true);
+
 		message_area.setBackground(Color.WHITE);
 		
 		DefaultCaret caret = (DefaultCaret) message_area.getCaret();

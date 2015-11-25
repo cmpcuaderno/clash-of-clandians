@@ -18,6 +18,8 @@ public class CampField extends JPanel{
 		this.home = home;
 		this.isHome = isHome;
 		this.enemyNo = enemyNo;
+		this.setPreferredSize(new Dimension(600, 480));
+		this.setBackground(Color.BLACK);
 		setLayout(new GridLayout(20,25, 1, 1));
 		
 		//tiles
@@ -29,7 +31,6 @@ public class CampField extends JPanel{
 			}
 		}
 		
-		setPreferredSize(new Dimension(500, 400));
 		setBackground(Color.BLACK);
 		
 	}

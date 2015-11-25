@@ -15,6 +15,7 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 	JButton barbarian, archer, giant, wizard, dragon, wallbreaker, hogrider; //troop buttons
 	JButton home; //go back to home camp
 	JPanel buttons; //panels
+	JPanel dummy;
 	CampField field;
 	Camp allyCamp, enemyCamp;
 	boolean toPlaceTroop; //true if there is a troop selected to deploy
@@ -28,11 +29,11 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 		this.allyCamp = allyCamp;
 		this.enemyCamp = enemyCamp;
 		this.enemyNo = enemyNo;
-		
-		
+		dummy = new JPanel();
 		//panels
 		this.setLayout(new BorderLayout());
 		field = new CampField(enemyCamp, false, allyCamp, enemyNo);
+		dummy.add(field);
 		field.addMouseListener(this);
 		buttons = new JPanel(new GridLayout(2,4,1,1));
 		buttons.setPreferredSize(new Dimension(500,50));
@@ -76,7 +77,8 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 		buttons.add(wallbreaker);
 		buttons.add(hogrider);
 		buttons.add(home);
-		add(field, BorderLayout.CENTER);
+		add(dummy, BorderLayout.CENTER);
+		//add(field, BorderLayout.CENTER);
 		add(buttons, BorderLayout.SOUTH);
 	}
 	
@@ -91,14 +93,14 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		if(!gameOver && enemyCamp.townHall != null && toPlaceTroop && field.tile[e.getY()/20][e.getX()/20].getOccupant() == null && field.tile[e.getY()/20][e.getX()/20].t[(((e.getY()/10)%20)%2)*2 + ((e.getX()/10)%20)%2] == null){
+		if(!gameOver && enemyCamp.townHall != null && toPlaceTroop && field.tile[e.getY()/24][e.getX()/24].getOccupant() == null && field.tile[e.getY()/24][e.getX()/24].t[(((e.getY()/12)%20)%2)*2 + ((e.getX()/12)%20)%2] == null){
 			if(troopType == 1 && allyCamp.barbarians.size() != 0) { //to position barbarian from queue
 				troopToPlace = allyCamp.barbarians.remove(0);
 				if(allyCamp.barbarians.size() == 0) {
 					troopType = 0; //if queue is empty, deselect
 					toPlaceTroop = false;
 				}
-				troopToPlace.position(e.getX()/10, e.getY()/10);
+				troopToPlace.position(e.getX()/12, e.getY()/12);
 				troopToPlace.deploy(enemyNo); //deploy in enemy camp
 				allyCamp.barbariansP.add((Barbarian) troopToPlace); //remove from queue, add to "positioned" list
 				field.tile[troopToPlace.getY()/2][troopToPlace.getX()/2].occupy(troopToPlace, (troopToPlace.getY()%2)*2 + troopToPlace.getX()%2);
@@ -111,7 +113,7 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 					troopType = 0; //if queue is empty, deselect
 					toPlaceTroop = false;
 				}
-				troopToPlace.position(e.getX()/10, e.getY()/10);
+				troopToPlace.position(e.getX()/12, e.getY()/12);
 				troopToPlace.deploy(enemyNo); //deploy in enemy camp
 				allyCamp.archersP.add((Archer) troopToPlace); //remove from queue, add to "positioned" list
 				field.tile[troopToPlace.getY()/2][troopToPlace.getX()/2].occupy(troopToPlace, (troopToPlace.getY()%2)*2 + troopToPlace.getX()%2);
@@ -124,7 +126,7 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 					troopType = 0; //if queue is empty, deselect
 					toPlaceTroop = false;
 				}
-				troopToPlace.position(e.getX()/10, e.getY()/10);
+				troopToPlace.position(e.getX()/12, e.getY()/12);
 				troopToPlace.deploy(enemyNo); //deploy in enemy camp
 				allyCamp.giantsP.add((Giant) troopToPlace); //remove from queue, add to "positioned" list
 				field.tile[troopToPlace.getY()/2][troopToPlace.getX()/2].occupy(troopToPlace, (troopToPlace.getY()%2)*2 + troopToPlace.getX()%2);
@@ -137,7 +139,7 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 					troopType = 0; //if queue is empty, deselect
 					toPlaceTroop = false;
 				}
-				troopToPlace.position(e.getX()/10, e.getY()/10);
+				troopToPlace.position(e.getX()/12, e.getY()/12);
 				troopToPlace.deploy(enemyNo); //deploy in enemy camp
 				allyCamp.wizardsP.add((Wizard) troopToPlace); //remove from queue, add to "positioned" list
 				field.tile[troopToPlace.getY()/2][troopToPlace.getX()/2].occupy(troopToPlace, (troopToPlace.getY()%2)*2 + troopToPlace.getX()%2);
@@ -150,7 +152,7 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 					troopType = 0; //if queue is empty, deselect
 					toPlaceTroop = false;
 				}
-				troopToPlace.position(e.getX()/10, e.getY()/10);
+				troopToPlace.position(e.getX()/12, e.getY()/12);
 				troopToPlace.deploy(enemyNo); //deploy in enemy camp
 				allyCamp.dragonsP.add((Dragon) troopToPlace); //remove from queue, add to "positioned" list
 				field.tile[troopToPlace.getY()/2][troopToPlace.getX()/2].occupy(troopToPlace, (troopToPlace.getY()%2)*2 + troopToPlace.getX()%2);
@@ -163,7 +165,7 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 					troopType = 0; //if queue is empty, deselect
 					toPlaceTroop = false;
 				}
-				troopToPlace.position(e.getX()/10, e.getY()/10);
+				troopToPlace.position(e.getX()/12, e.getY()/12);
 				troopToPlace.deploy(enemyNo); //deploy in enemy camp
 				allyCamp.wallBreakersP.add((WallBreaker) troopToPlace); //remove from queue, add to "positioned" list
 				field.tile[troopToPlace.getY()/2][troopToPlace.getX()/2].occupy(troopToPlace, (troopToPlace.getY()%2)*2 + troopToPlace.getX()%2);
@@ -176,7 +178,7 @@ public class EnemyCamp extends JPanel implements MouseListener, ActionListener{
 					troopType = 0; //if queue is empty, deselect
 					toPlaceTroop = false;
 				}
-				troopToPlace.position(e.getX()/10, e.getY()/10);
+				troopToPlace.position(e.getX()/12, e.getY()/12);
 				troopToPlace.deploy(enemyNo); //deploy in enemy camp
 				allyCamp.hogRidersP.add((HogRider) troopToPlace); //remove from queue, add to "positioned" list
 				field.tile[troopToPlace.getY()/2][troopToPlace.getX()/2].occupy(troopToPlace, (troopToPlace.getY()%2)*2 + troopToPlace.getX()%2);

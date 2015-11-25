@@ -3,7 +3,9 @@ package Players;
 import java.util.ArrayList;
 
 public class Camp1 extends Camp{
-	public Camp1(){
+	public Camp1(int playerNo){
+		
+		this.playerNo = playerNo;
 		// queued buildings/troops
 		int i;
 		barbarians = new ArrayList<Barbarian>();

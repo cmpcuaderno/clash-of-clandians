@@ -16,6 +16,8 @@ public class Server {
     private static HashSet<String> names = new HashSet<String>();
 
     private static HashSet<PrintWriter> writers = new HashSet<PrintWriter>();
+    
+    private static int number_of_players; 
 
     public static void main(String[] args) throws Exception {
         System.out.println("The chat server is running.");
@@ -44,7 +46,7 @@ public class Server {
                 in = new BufferedReader(new InputStreamReader(
                     socket.getInputStream()));
                 out = new PrintWriter(socket.getOutputStream(), true);
-
+                
                 while (true) {
                     out.println("SUBMITNAME");
                     name = in.readLine();
@@ -58,6 +60,21 @@ public class Server {
                         }
                     }
                 }
+                
+                while (true) {
+                    out.println("NUMBEROFPLAYERS");
+                    String num = in.readLine();
+                    if (num == null) {
+                        return;
+                    }
+
+                    else {
+                    	if(Integer.parseInt(num) <= 6) {
+                    		number_of_players = Integer.parseInt(num);
+                    		break;
+                    	}
+                    }
+                }                
 
                 out.println("NAMEACCEPTED");
                 writers.add(out);
@@ -72,6 +89,8 @@ public class Server {
                         writer.println("MESSAGE " + name + " [" + new Timestamp(date.getTime()).toString()  + "] : " + input);
                     }
                 }
+                
+               
             } catch (IOException e) {
                 System.out.println(e);
             } finally {

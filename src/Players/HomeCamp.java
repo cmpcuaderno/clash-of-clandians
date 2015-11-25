@@ -20,18 +20,20 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 	Defense defToPlace; //defense building to position; will be repositioned if toPlaceDef==true
 	int defType = 0; //type of defense (button) selected; 1=cannon, 2=archerTower, 3=mortar, wizardTower=4, wall=5
 	JPanel buttons;
+	JPanel dummy;
 	CampField field;
 	boolean gameOver = false;
 	
-	public HomeCamp(Camp camp) {		
+	public HomeCamp(Camp camp) {
 		//panels
+		dummy = new JPanel();
 		setLayout(new BorderLayout());
 		field = new CampField(camp, true, camp, 0); //actual game field
 		field.addMouseListener(this);
 		buttons = new JPanel(); //buttons for positioning buildings
 		buttons.setLayout(new GridLayout(2,3,1,1));
 		buttons.setPreferredSize(new Dimension(500,50));
-		
+		dummy.add(field);
 		//position town hall
 		field.tile[camp.townHall.getY()][camp.townHall.getX()].occupy(camp.townHall, field);
 		
@@ -65,8 +67,7 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 		buttons.add(wall);
 		buttons.add(attack);
 		add(buttons, BorderLayout.SOUTH);
-		add(field, BorderLayout.CENTER);
-		
+		add(dummy, BorderLayout.CENTER);
 	}
 	
 	void disableButtons(){ //checks for empty queues, disables button
@@ -176,14 +177,14 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		if(!gameOver && !field.tile[e.getY()/20][e.getX()/20].isOccupied && toPlaceDef){
+		if(!gameOver && !field.tile[e.getY()/24][e.getX()/24].isOccupied && toPlaceDef){
 			if(defType == 1 && camp.cannons.size() != 0) { //to position cannon from queue
 				defToPlace = camp.cannons.remove(0);
 				if(camp.cannons.size() == 0) {
 					defType = 0; //if queue is empty, deselect
 					toPlaceDef = false;
 				}
-				defToPlace.position(e.getX()/20, e.getY()/20);
+				defToPlace.position(e.getX()/24, e.getY()/24);
 				camp.cannonsP.add((Cannon) defToPlace); //remove from queue, add to "positioned" list
 				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace, field);
 				cannon.setText("Cannons (" + camp.cannons.size() + ")");
@@ -195,7 +196,7 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 					defType = 0; //if queue is empty, deselect
 					toPlaceDef = false;
 				}
-				defToPlace.position(e.getX()/20, e.getY()/20);
+				defToPlace.position(e.getX()/24, e.getY()/24);
 				camp.archerTowersP.add((ArcherTower) defToPlace); //remove from queue, add to "positioned" list
 				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace, field);
 				archerTower.setText("Archer Towers (" + camp.archerTowers.size() + ")");
@@ -207,7 +208,7 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 					defType = 0; //if queue is empty, deselect
 					toPlaceDef = false;
 				}
-				defToPlace.position(e.getX()/20, e.getY()/20);
+				defToPlace.position(e.getX()/24, e.getY()/24);
 				camp.mortarsP.add((Mortar) defToPlace); //remove from queue, add to "positioned" list
 				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace, field);
 				mortar.setText("Mortars (" + camp.mortars.size() + ")");
@@ -219,7 +220,7 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 					defType = 0; //if queue is empty, deselect
 					toPlaceDef = false;
 				}
-				defToPlace.position(e.getX()/20, e.getY()/20);
+				defToPlace.position(e.getX()/24, e.getY()/24);
 				camp.wizardTowersP.add((WizardTower) defToPlace); //remove from queue, add to "positioned" list
 				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace, field);
 				wizardTower.setText("Wizard Towers (" + camp.wizardTowers.size() + ")");
@@ -231,7 +232,7 @@ public class HomeCamp extends JPanel implements ActionListener, MouseListener{
 					defType = 0; //if queue is empty, deselect
 					toPlaceDef = false;
 				}
-				defToPlace.position(e.getX()/20, e.getY()/20);
+				defToPlace.position(e.getX()/24, e.getY()/24);
 				camp.wallsP.add((Wall) defToPlace); //remove from queue, add to "positioned" list
 				field.tile[defToPlace.getY()][defToPlace.getX()].occupy(defToPlace, field);
 				wall.setText("Walls (" + camp.walls.size() + ")");

@@ -19,40 +19,41 @@ public class MainGame implements ActionListener{
 	MainFrame game;
 	
 	
-	public MainGame(Client client) {
-//		JPanel topPanel = new JPanel(new BorderLayout());
-//		timer = new Timer(1000, this); //one second
-//		time = new JLabel("15:00");
-//		game = new MainFrame();
-//		while(!game.startGame) {System.out.print("");} // waiting for other players
-//		game.add(topPanel, BorderLayout.NORTH);
+	public MainGame(Client client, int noOfPlayers) {
+
+		JPanel topPanel = new JPanel(new BorderLayout());
+		timer = new Timer(1000, this); //one second
+		time = new JLabel("15:00");
+		game = new MainFrame(client, noOfPlayers);
+		while(!game.startGame) { System.out.print(""); }
+		//game = new MainFrame();
+		//while(!game.startGame) {System.out.print("");} // waiting for other players
+		game.add(topPanel, BorderLayout.NORTH);
+		game.Home = game.createCamp(game.campNo);
+		game.dummyData();
+		game.goToHomeCamp();
+		trophyCount = new JLabel("Trophy Count: " + game.Home.camp.getTrophyCount() + "\t\t\t\t\t");
+		topPanel.add(trophyCount, BorderLayout.EAST);
+		topPanel.add(time, BorderLayout.WEST);
+		timer.start();
+		
+		
+		
+		
+		
+		
+		//game.add(top_panel);
+		
 //		game.Home = game.createCamp(game.campNo);
-//		game.dummyData();
-//		game.goToHomeCamp();
-//		trophyCount = new JLabel("Trophy Count: " + game.Home.camp.getTrophyCount() + "\t\t\t\t\t");
-//		topPanel.add(trophyCount, BorderLayout.EAST);
-//		topPanel.add(time, BorderLayout.WEST);
-//		timer.start();
-		
-//		JPanel top_panel = new JPanel(new BorderLayout());
-//		timer = new Timer(1000, this);
-		
-		game = new MainFrame(client);
-		
-//		while(!game.startGame) { System.out.println(""); }
-		
-//		game.add(top_panel);
-		
-//		game.Home = game.createCamp(game.campNo);
-		
-//		game.dummyData();
-		
-//		game.goToHomeCamp();
-		
-//		trophyCount = new JLabel("Trophy Count: " + game.Home.camp.getTrophyCount() + "\t\t\t\t\t");
 //		
-//		top_panel.add(trophyCount, BorderLayout.EAST);
-//		top_panel.add();
+//		game.dummyData();
+		
+		//game.goToHomeCamp();
+		
+		//trophyCount = new JLabel("Trophy Count: " + game.Home.camp.getTrophyCount() + "\t\t\t\t\t");
+		
+		//top_panel.add(trophyCount, BorderLayout.EAST);
+		//top_panel.add();
 		
 	}
 	
